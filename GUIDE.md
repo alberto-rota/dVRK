@@ -8,12 +8,12 @@
 
 # A comprehensive guide for the *daVinci* robot at NEARLab-Medical Robotics
 
-- [A comprehensive guide for the *daVinci* robot at NEARLab-Medical Robotics](#a-comprehensive-guide-for-the-davinci-robot-at-nearlab-medical-robotics)
-  - [Lab configuration and network connectivity](#lab-configuration-and-network-connectivity)
-  - [Requirements](#requirements)
-  - [ROS network startup](#ros-network-startup)
-  - [Start-up the *daVinci* for teleoperation](#start-up-the-davinci-for-teleoperation)
-  - [Available demos](#available-demos)
+**TABLE OF CONTENTS**
+- [Lab configuration and network connectivity](#lab-configuration-and-network-connectivity)
+- [Requirements](#requirements)
+- [ROS network startup](#ros-network-startup)
+- [Start-up the *daVinci* for teleoperation](#start-up-the-davinci-for-teleoperation)
+- [Available demos](#available-demos)
 
 ## Lab configuration and network connectivity
 The *daVinci* room of NEARLab-Medical Robotics is equipped with the following devices:
