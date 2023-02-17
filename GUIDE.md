@@ -7,12 +7,14 @@
 </a> </p>
 
 # A comprehensive guide for the *daVinci* robot at NEARLab-Medical Robotics
+*This guide is made and maintained by [Alberto Rota](https://nearlab.polimi.it/medical/alberto-rota/)*
+***
 
 **TABLE OF CONTENTS**
 - [Lab configuration and network connectivity](#lab-configuration-and-network-connectivity)
 - [Requirements](#requirements)
 - [ROS network startup](#ros-network-startup)
-- [Start-up the *daVinci* for teleoperation](#start-up-the-davinci-for-teleoperation)
+- [Use the *daVinci* for teleoperation](#use-the-davinci-for-teleoperation)
 - [Available demos](#available-demos)
 
 ## Lab configuration and network connectivity
@@ -51,16 +53,37 @@ A ROS framework is the most important layer of communication in the *daVinci* ro
 **ROS Noetic** ➔ 🌐 [Download link](http://wiki.ros.org/noetic/Installation/Ubuntu)
 
 
-
-
-
 ## ROS network startup
 The *daVinci* room is equipped with a ROS network that handles the communication between all the computer and the interfaces. 
-To start up the ROS network, run the ROSMASTER node on **GRU**: open a terminal and run `roscore`.
+To start up the ROS network, run the ROSMASTER node on **GRU**: open a terminal and run 
+```
+roscore
+```
+
 If you open the terminal inside a python virtual environment and `(base)` is displayed before the terminal prompt, you have to deactivate the virtual environment by running the command `cda` before running `roscore`.
 
 Check that the output is correct and that the `ROS_MASTER_URI` variable is set to `http://192.168.1.1:11311/`
 
-## Start-up the *daVinci* for teleoperation
+To check if a computer is connected to the ROS network, run `rostopic list` in a terminal. If the computer is connected, you will see a long list of topics, most starting with `/dvrk/...`. 
+If you are not connected to the network, you will see an error message like `ERROR: Unable to communicate with master!`. In that case, some troubleshooting tips are:
+- Check that the computer is properly connected to the local network via Ethernet cable (Ethernet cables become "loose" over time, and they may disconnect by themselves)
+- Check that on your computer, the `ROS_MASTER_URI` variable is set to `http://192.168.1.1/11311/`. Do this by running `echo $ROS_MASTER_URI` in a terminal.
+  If `ROS_MASTER_URI` is not correct, run 
+  ```
+  export ROS_MASTER_URI=http://192.168.1.1/11311/ 
+  ```
+
+- Check that on your computer, the `ROS_IP` variable is set to the IP of your own computer. Do this by running `echo $ROS_IP` in a terminal and compare it with the output of `ifconfig` (by now I assume that you are using Ubuntu or WSL). If `ROS_IP` is not correct, obtain your IP and then run 
+  ```
+  export ROS_IP=<your IP> 
+  ```
+
+## Use the *daVinci* for teleoperation
+
+**Power the robot**: On the back of the Controller Cart, turn on the main power switch and the endoscope power switch, as indicated in the figure
+
+![Power on buttons]() 
+
+
 
 ## Available demos
