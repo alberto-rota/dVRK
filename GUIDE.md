@@ -47,26 +47,7 @@ A ROS framework is the most important layer of communication in the *daVinci* ro
 
 
 
-***
-**Unity:** Version 20.3.21f1 
 
-The simulator should run with no compatibility issues also on newer versions of Unity, but it has not been tested on those platforms. Therefore, using the version specified above is recommended, although it is not a strict requirement.
-
-🌐 [Download link](https://unity3d.com/get-unity/download/archive)
-***
-
-
-***
-If you plan on working only on Unity and not on the ROS side of the project, you can skip the rest of the "Requirements" section
-***
-
-***
-**Rosbridge Server**
-
-Unity cannot read ROS messages by himself. In order to communicate with ROS, we need to use a *bridge* that translates ROS messages into a format that Unity can understand. The *Rosbridge package* makes this conversion possible
-
-🌐 [Download link](http://wiki.ros.org/rosbridge_suite/Tutorials/RunningRosbridge)
-***
 
 ## ROS network startup
 The *daVinci* room is equipped with a ROS network that handles the communication between all the computer and the interfaces. 
