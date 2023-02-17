@@ -6,4 +6,12 @@
 </picture>
 </a> </p>
 
-# dVRK
+# A comprehensive guide for the *daVinci* robot at NEARLab-Medical Robotics
+
+
+
+## Lab configuration
+
+## Start-up the *daVinci* for teleoperation
+
+## Available demos
