@@ -7,17 +7,22 @@
 </a> </p>
 
 # A comprehensive guide for the *daVinci* robot at NEARLab-Medical Robotics
-*This guide is made and maintained by [Alberto Rota](https://nearlab.polimi.it/medical/alberto-rota/)*
+*This guide is made and maintained by [Alberto Rota](https://nearlab.polimi.it/medical/alberto-rota/). Contributes, issues and corrections are welcome at [Alberto's email](mailto:alberto1.rota@polimi.it).*
 ***
 
 **TABLE OF CONTENTS**
-- [Lab configuration and network connectivity](#lab-configuration-and-network-connectivity)
+- [Lab configuration and nomenclature network connectivity](#lab-configuration-and-nomenclature-network-connectivity)
 - [Requirements](#requirements)
 - [ROS network startup](#ros-network-startup)
-- [Use the *daVinci* for teleoperation](#use-the-davinci-for-teleoperation)
+- [The *daVinci* for teleoperation](#the-davinci-for-teleoperation)
+  - [STEP 1 - Power the robot](#step-1---power-the-robot)
+  - [STEP 2 - Turn on the HRSVs](#step-2---turn-on-the-hrsvs)
+  - [STEP 3 - Turn on the endoscope lighting system](#step-3---turn-on-the-endoscope-lighting-system)
+  - [STEP 4 - Start the ROS framework](#step-4---start-the-ros-framework)
+  - [STEP 5 - Start the dVRK control console](#step-5---start-the-dvrk-control-console)
 - [Available demos](#available-demos)
 
-## Lab configuration and network connectivity
+## Lab configuration and nomenclature network connectivity 
 The *daVinci* room of NEARLab-Medical Robotics is equipped with the following devices:
 - 1 Patient Cart equipped with 2 functional PSMs (PSM1 and PSM2), 1 non functional PSM (PSM3), and 1 functional ECM
 - 1 Surgeon Cart equipped with 2 functional MTMs (MTMR and MTML), and one HRSV pair
@@ -78,11 +83,61 @@ If you are not connected to the network, you will see an error message like `ERR
   export ROS_IP=<your IP> 
   ```
 
-## Use the *daVinci* for teleoperation
+## The *daVinci* for teleoperation
 
-**Power the robot**: On the back of the Controller Cart, turn on the main power switch and the endoscope power switch, as indicated in the figure
+### STEP 1 - Power the robot
+On the back of the Controller Cart, turn on the main power switch [1] and the endoscope power switch [2], as indicated in the figure
 
-![Power on buttons]() 
+![Power on buttons](images/power_buttons.jpg) 
+
+### STEP 2 - Turn on the HRSVs
+At the surgical console, no video should be displayed inside the binocular. To turn on these displays reach under the cart (see photo) and press the button on the piece of circuitry highlighted in orange in the pic. The button is not immediately reachable, but it's easy to find by touching the component. 
+
+![HRSC power on](images/hrsv_buttons.jpg)
+
+Once the button is pressed, an LED should turn on.
+The LED light is:
+- **OFF** if the display is turned off
+- **ORANGE** if the display is turned on but it's not connected to any video source
+- **GREEN** if the display is turned on and connected to a video source
+  
+If it's green, check that something is visible inside the HRSV ocular.
+
+Repeat the procedure for the other button (there is one on the left and one on the right).
+
+Each of the two HRSVs acts as a separate HDMI monitor and it will display as so into the display manager of your OS.
+
+### STEP 3 - Turn on the endoscope lighting system
+Make sure you powered on the endoscope by turning on the power switch on the back of the Controller Cart.
+
+On the front of the controller cart, press the buttons in the order indicated in the figure below, specifically:
+- Turn on the front Power Switch of the optic fiber system
+- Lamp ON
+- Brightness to 100%
+
+![endsocope light buttons]()
+
+The tip of the endoscope mounted on the patient cart should be now emitting an intense light.
+
+### STEP 4 - Start the ROS framework
+If you need to view the endoscope camera feeds (left and right), INSTEAD OF STARTING THE ROSMASTER with the `roscore` command, in a terminal on **GRU** (outside of the `(base)` conda virtual environment) use
+```
+terminator -l vision
+```
+or its alias
+```
+tvl
+```
+It opens multiple terminals and runs multiple ROS nodes (**including the ROSMASTER, so before running this command check that no ROSMASTER is running**). It also opens two windows with the LEFT and RIGHT camera feed separately: to view the camera feeds inside the HRSVs and have 3D depth perception, drag the windows outside the right border of the main monitor on GRU and into the HRSV monitors. The monitors should be set up in this configuration: if you are in doubt, search for *Display Settings* in Ubuntu.
+
+![hrsv monitor config](images/hrsv_monitor_config.png)
+
+Check that the HMDIs from the HRSV screens are connected to GRU
+
+See the [ROS network startup](#ros-network-startup) section if you don't need to see the camera feeds or if you need troubleshooting tips.
+
+### STEP 5 - Start the dVRK control console
+Switch to the **dVRK** computer.
 
 
 
