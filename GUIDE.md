@@ -113,9 +113,9 @@ Make sure you powered on the endoscope by turning on the power switch on the bac
 On the front of the controller cart, press the buttons in the order indicated in the figure below, specifically:
 - Turn on the front Power Switch of the optic fiber system
 - Lamp ON
-- Brightness to 100%
+- Brightness Control OPEN to 100%
 
-![endsocope light buttons]()
+![endsocope light buttons](images/endoscope_buttons.jpg)
 
 The tip of the endoscope mounted on the patient cart should be now emitting an intense light.
 
