@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="144.8821mm"
+   height="182.78018mm"
+   viewBox="0 0 144.8821 182.78018"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="C:\Users\alber\Desktop\NEARLab\dVRK\room_map.png"
+   inkscape:export-xdpi="44.378201"
+   inkscape:export-ydpi="44.378201"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="drawing.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.5472413"
+     inkscape:cx="274.10212"
+     inkscape:cy="346.28234"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient16160">
+      <stop
+         style="stop-color:#2fb241;stop-opacity:1;"
+         offset="0"
+         id="stop16156" />
+      <stop
+         style="stop-color:#2fb241;stop-opacity:0;"
+         offset="1"
+         id="stop16158" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient16160"
+       id="linearGradient16164"
+       x1="158.94871"
+       y1="262.27639"
+       x2="178.88897"
+       y2="262.27639"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-14.778773,-16.611443)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.68843;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect56449-8"
+       width="206.76825"
+       height="66.260132"
+       x="-5.9471869"
+       y="241.7308"
+       ry="0.18311593"
+       inkscape:export-filename="C:\Users\alber\Desktop\NEARLab\dVRK\images\hrsv_monitor_config.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:2.3474;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect56449"
+       width="144.8821"
+       height="182.78018"
+       x="14.778773"
+       y="16.611443"
+       ry="0.50512975" />
+    <path
+       id="rect846"
+       style="fill:none;stroke:#000000;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+       d="m 19.049518,18.58864 104.507162,0.225468 -0.0938,22.997777 v 0 l 35.45681,0.125239 -0.45094,151.794596 c -0.003,1.03154 -0.83046,1.86201 -1.86202,1.86201 H 19.049518 c -1.031558,0 -1.862018,-0.83046 -1.862018,-1.86201 V 20.450658 c 0,-1.031558 0.830462,-1.864243 1.862018,-1.862018 z"
+       sodipodi:nodetypes="sccccssssss" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+       id="rect2852"
+       width="0.90187359"
+       height="6.0876465"
+       x="101.97181"
+       y="192.09908"
+       ry="0.45093679" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke markers fill"
+       id="rect2857"
+       width="0.67640519"
+       height="6.9895201"
+       x="147.87505"
+       y="191.87361"
+       ry="0.3382026" />
+    <rect
+       style="fill:none;stroke:#ffa931;stroke-width:1.96993;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect2881"
+       width="35.052197"
+       height="19.043941"
+       x="44.928642"
+       y="171.4164"
+       ry="0.28566003" />
+    <rect
+       style="fill:none;stroke:#ffa931;stroke-width:1.325;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect2881-0"
+       width="88.450867"
+       height="51.08654"
+       x="6.344532"
+       y="249.71391"
+       ry="0.76630056"
+       inkscape:export-filename="C:\Users\alber\Desktop\NEARLab\dVRK\images\hrsv_monitor_config.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <rect
+       style="fill:none;stroke:#26ba2b;stroke-width:2.01107;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect2881-8"
+       width="34.560127"
+       height="20.13015"
+       x="-162.81992"
+       y="20.824093"
+       ry="0.3019532"
+       transform="rotate(-90)" />
+    <rect
+       style="fill:none;stroke:#a726ba;stroke-width:2.25256;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect2881-8-2"
+       width="26.201778"
+       height="33.311016"
+       x="-77.584854"
+       y="54.479771"
+       ry="0.49966681"
+       transform="rotate(-90)" />
+    <rect
+       style="fill:none;stroke:#bab926;stroke-width:1.78787;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect2881-8-2-6"
+       width="22.833504"
+       height="24.080563"
+       x="-63.612682"
+       y="93.59166"
+       ry="0.36120957"
+       transform="rotate(-90)" />
+    <rect
+       style="fill:none;stroke:#ba3c26;stroke-width:3.36071;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect2881-8-2-2"
+       width="63.901558"
+       height="46.02758"
+       x="-33.104286"
+       y="134.47862"
+       ry="0.65523195"
+       transform="matrix(0.67333498,-0.73933754,0.73290758,0.68032821,0,0)" />
+    <rect
+       style="fill:none;stroke:#5131ff;stroke-width:2.01107;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect3241"
+       width="34.560127"
+       height="20.13015"
+       x="-122.2356"
+       y="21.049561"
+       ry="0.3019532"
+       transform="rotate(-90)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="path4552"
+       sodipodi:type="arc"
+       sodipodi:cx="-147.34589"
+       sodipodi:cy="-195.04857"
+       sodipodi:rx="21.419497"
+       sodipodi:ry="21.419497"
+       sodipodi:start="0"
+       sodipodi:end="1.5707963"
+       sodipodi:arc-type="slice"
+       d="m -125.92639,-195.04857 a 21.419497,21.419497 0 0 1 -21.4195,21.4195 v -21.4195 z"
+       transform="scale(-1)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="path4965"
+       sodipodi:type="arc"
+       sodipodi:cx="-195.04857"
+       sodipodi:cy="103.83049"
+       sodipodi:rx="21.419497"
+       sodipodi:ry="21.419497"
+       sodipodi:start="0"
+       sodipodi:end="1.5707963"
+       sodipodi:arc-type="slice"
+       d="m -173.62907,103.83049 a 21.419497,21.419497 0 0 1 -21.4195,21.4195 v -21.4195 z"
+       transform="rotate(-90)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.27451px;line-height:1.25;font-family:sans-serif;fill:#5131ff;fill-opacity:1;stroke:none;stroke-width:0.272794"
+       x="23.436419"
+       y="107.93596"
+       id="text9347"><tspan
+         sodipodi:role="line"
+         id="tspan9345"
+         style="font-size:7.27451px;fill:#5131ff;fill-opacity:1;stroke-width:0.272794"
+         x="23.436419"
+         y="107.93596">GRU</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.27451px;line-height:1.25;font-family:sans-serif;fill:#ffa931;fill-opacity:1;stroke:none;stroke-width:0.272794"
+       x="54.780548"
+       y="184.13942"
+       id="text9347-5"><tspan
+         sodipodi:role="line"
+         id="tspan9345-09"
+         style="font-size:7.27451px;fill:#ffa931;fill-opacity:1;stroke-width:0.272794"
+         x="54.780548"
+         y="184.13942">WIN</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.69724px;line-height:1.25;font-family:sans-serif;fill:#a726ba;fill-opacity:1;stroke:none;stroke-width:0.213646"
+       x="71.196678"
+       y="63.705547"
+       id="text9347-9"><tspan
+         sodipodi:role="line"
+         style="font-size:5.69724px;text-align:center;text-anchor:middle;fill:#a726ba;fill-opacity:1;stroke-width:0.213646"
+         x="71.196678"
+         y="63.705547"
+         id="tspan32501">SURGEON</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:5.69724px;text-align:center;text-anchor:middle;fill:#a726ba;fill-opacity:1;stroke-width:0.213646"
+         x="71.196678"
+         y="70.827095"
+         id="tspan40473">CART</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.14757px;line-height:1.25;font-family:sans-serif;fill:#bab926;fill-opacity:1;stroke:none;stroke-width:0.118033"
+       x="105.52557"
+       y="52.390606"
+       id="text9347-9-2"><tspan
+         sodipodi:role="line"
+         style="font-size:3.14757px;text-align:center;text-anchor:middle;fill:#bab926;fill-opacity:1;stroke-width:0.118033"
+         x="105.52557"
+         y="52.390606"
+         id="tspan40473-4">CONTROLLER</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:3.14757px;text-align:center;text-anchor:middle;fill:#bab926;fill-opacity:1;stroke-width:0.118033"
+         x="105.52557"
+         y="56.325069"
+         id="tspan53398">CART</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.73641px;line-height:1.25;font-family:sans-serif;fill:#ba3c26;fill-opacity:1;stroke:none;stroke-width:0.290115"
+       x="114.07367"
+       y="105.96861"
+       id="text9347-9-4"><tspan
+         sodipodi:role="line"
+         style="font-size:7.73641px;text-align:center;text-anchor:middle;fill:#ba3c26;fill-opacity:1;stroke-width:0.290115"
+         x="114.07367"
+         y="105.96861"
+         id="tspan40473-1">PATIENT</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.73641px;text-align:center;text-anchor:middle;fill:#ba3c26;fill-opacity:1;stroke-width:0.290115"
+         x="114.07367"
+         y="115.63912"
+         id="tspan42383">CART</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.94165px;line-height:1.25;font-family:sans-serif;fill:#26ba2b;fill-opacity:1;stroke:none;stroke-width:0.222811"
+       x="22.835075"
+       y="147.55103"
+       id="text9347-0"><tspan
+         sodipodi:role="line"
+         id="tspan9345-0"
+         style="font-size:5.94165px;fill:#26ba2b;fill-opacity:1;stroke-width:0.222811"
+         x="22.835075"
+         y="147.55103">dVRK</tspan></text>
+    <rect
+       style="fill:none;stroke:#5f51d4;stroke-width:1.15554;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect880"
+       width="43.960514"
+       height="25.390263"
+       x="99.906044"
+       y="249.61765"
+       ry="0.38085514"
+       inkscape:export-filename="C:\Users\alber\Desktop\NEARLab\dVRK\images\hrsv_monitor_config.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <rect
+       style="fill:none;stroke:#b2512f;stroke-width:1.15554;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       id="rect882"
+       width="43.960514"
+       height="25.390263"
+       x="147.00162"
+       y="249.61765"
+       ry="0.38085514"
+       inkscape:export-filename="C:\Users\alber\Desktop\NEARLab\dVRK\images\hrsv_monitor_config.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.27451px;line-height:1.25;font-family:sans-serif;fill:#ffa931;fill-opacity:1;stroke:none;stroke-width:0.272794"
+       x="51.706879"
+       y="274.23624"
+       id="text9347-5-9"
+       inkscape:export-filename="C:\Users\alber\Desktop\NEARLab\dVRK\images\hrsv_monitor_config.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         sodipodi:role="line"
+         id="tspan9345-09-7"
+         style="font-size:7.27451px;text-align:center;text-anchor:middle;fill:#ffa931;fill-opacity:1;stroke-width:0.272794"
+         x="51.706879"
+         y="274.23624">GRU </tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.27451px;text-align:center;text-anchor:middle;fill:#ffa931;fill-opacity:1;stroke-width:0.272794"
+         x="51.706879"
+         y="283.32938"
+         id="tspan1371">main monitor</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.27451px;line-height:1.25;font-family:sans-serif;fill:#5f51d4;fill-opacity:1;stroke:none;stroke-width:0.272794"
+       x="122.38744"
+       y="260.40167"
+       id="text9347-5-9-2"
+       inkscape:export-filename="C:\Users\alber\Desktop\NEARLab\dVRK\images\hrsv_monitor_config.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         sodipodi:role="line"
+         style="font-size:7.27451px;text-align:center;text-anchor:middle;fill:#5f51d4;fill-opacity:1;stroke-width:0.272794"
+         x="122.38744"
+         y="260.40167"
+         id="tspan1371-2">HRSV</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.27451px;text-align:center;text-anchor:middle;fill:#5f51d4;fill-opacity:1;stroke-width:0.272794"
+         x="122.38744"
+         y="269.49481"
+         id="tspan11918">left</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.27451px;line-height:1.25;font-family:sans-serif;fill:#b2512f;fill-opacity:1;stroke:none;stroke-width:0.272794;stroke-opacity:1"
+       x="168.60982"
+       y="259.67099"
+       id="text9347-5-9-2-3"
+       inkscape:export-filename="C:\Users\alber\Desktop\NEARLab\dVRK\images\hrsv_monitor_config.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"><tspan
+         sodipodi:role="line"
+         style="font-size:7.27451px;text-align:center;text-anchor:middle;fill:#b2512f;fill-opacity:1;stroke-width:0.272794;stroke:none;stroke-opacity:1"
+         x="168.60982"
+         y="259.67099"
+         id="tspan1371-2-2">HRSV</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.27451px;text-align:center;text-anchor:middle;fill:#b2512f;fill-opacity:1;stroke-width:0.272794;stroke:none;stroke-opacity:1"
+         x="168.60982"
+         y="268.76413"
+         id="tspan15528">right</tspan></text>
+  </g>
+</svg>

@@ -20,6 +20,7 @@
   - [STEP 3 - Turn on the endoscope lighting system](#step-3---turn-on-the-endoscope-lighting-system)
   - [STEP 4 - Start the ROS framework](#step-4---start-the-ros-framework)
   - [STEP 5 - Start the dVRK control console](#step-5---start-the-dvrk-control-console)
+  - [STEP 6 - Set the instrument type](#step-6---set-the-instrument-type)
 - [Available demos](#available-demos)
 
 ## Lab configuration and nomenclature network connectivity 
@@ -27,16 +28,16 @@ The *daVinci* room of NEARLab-Medical Robotics is equipped with the following de
 - 1 Patient Cart equipped with 2 functional PSMs (PSM1 and PSM2), 1 non functional PSM (PSM3), and 1 functional ECM
 - 1 Surgeon Cart equipped with 2 functional MTMs (MTMR and MTML), and one HRSV pair
 - 1 Controller Cart
-- 1 Windows PC (named **WIN**) for computation-heavy tasks
-- 1 Ubuntu PC (named **dVRK**) for controlling robot
-- 1 Ubuntu PC (named **GRU**) handling the ROS framework
+- 1 Windows PC (named ``WIN``) for computation-heavy tasks
+- 1 Ubuntu PC (named ``dVRK``) for controlling robot
+- 1 Ubuntu PC (named ``GRU``) handling the ROS framework
   
 ![room_map](images/room_map.png)
 
 IP addresses of the computers are fixed and are the following:
-- **GRU**: 192.168.1.1
-- **dVRK**: 192.198.1.2
-- **WIN**: 192.168.1.3
+- ``GRU``: 192.168.1.1
+- ``dVRK``: 192.198.1.2
+- ``WIN``: 192.168.1.3
   
 If you connect to the local network via Ethernet, your IP address will be assigned automatically by the router and it will be static. 
 
@@ -44,7 +45,7 @@ Check your IP address by running `ifconfig` in a terminal (Linux) or `ipconfig` 
 
 ## Requirements 
 
-To send/recieve messages to/from the robot, like joint positions, teleoperation commands, you need to be connected to the local network (wired only for secutiry reasons) via an Ethernet cable. An Ethernet access point is available between **GRU** and **dVRK**; Ethernet cables are available around the room. If your computer does not have an Ethernet port, you can use a USB Ethernet adapter
+To send/recieve messages to/from the robot, like joint positions, teleoperation commands, you need to be connected to the local network (wired only for secutiry reasons) via an Ethernet cable. An Ethernet access point is available between ``GRU`` and ``dVRK``; Ethernet cables are available around the room. If your computer does not have an Ethernet port, you can use a USB Ethernet adapter
 
  **Ethernet Adapter** ➔  🌐 [Amazon link](https://www.amazon.it/s?k=ethernet+usb+c&sprefix=ethern%2Caps%2C183&ref=nb_sb_ss_ts-doa-p_3_6)
 
@@ -60,7 +61,7 @@ A ROS framework is the most important layer of communication in the *daVinci* ro
 
 ## ROS network startup
 The *daVinci* room is equipped with a ROS network that handles the communication between all the computer and the interfaces. 
-To start up the ROS network, run the ROSMASTER node on **GRU**: open a terminal and run 
+To start up the ROS network, run the ROSMASTER node on ``GRU``: open a terminal and run 
 ```
 roscore
 ```
@@ -120,25 +121,70 @@ On the front of the controller cart, press the buttons in the order indicated in
 The tip of the endoscope mounted on the patient cart should be now emitting an intense light.
 
 ### STEP 4 - Start the ROS framework
-If you need to view the endoscope camera feeds (left and right), INSTEAD OF STARTING THE ROSMASTER with the `roscore` command, in a terminal on **GRU** (outside of the `(base)` conda virtual environment) use
+If you need to view the endoscope camera feeds (left and right), INSTEAD OF STARTING THE ROSMASTER with the `roscore` command, in a terminal on ``GRU`` (outside of the `(base)` conda virtual environment) use
 ```
 terminator -l vision
 ```
 or its alias
 ```
-tvl
+tlv
 ```
 It opens multiple terminals and runs multiple ROS nodes (**including the ROSMASTER, so before running this command check that no ROSMASTER is running**). It also opens two windows with the LEFT and RIGHT camera feed separately: to view the camera feeds inside the HRSVs and have 3D depth perception, drag the windows outside the right border of the main monitor on GRU and into the HRSV monitors. The monitors should be set up in this configuration: if you are in doubt, search for *Display Settings* in Ubuntu.
 
 ![hrsv monitor config](images/hrsv_monitor_config.png)
 
-Check that the HMDIs from the HRSV screens are connected to GRU
-
 See the [ROS network startup](#ros-network-startup) section if you don't need to see the camera feeds or if you need troubleshooting tips.
 
 ### STEP 5 - Start the dVRK control console
-Switch to the **dVRK** computer.
+The GUI control panel for the *daVinci* robot runs on the ``dVRK`` computer.
+Open a terminal and run
+```
+dvrk_teleoperation
+```
+This command sources the ROS environment, closes the safety relays for the QLA boards on the controller and opens the GUI control panel. In order to open the control panel, the previous two commands must be executed successfully. 
+
+The command outputs three yellow message, one for each function, and an <span style="color:green">**OK**</span> confirmation or an <span style="color:red"> **ERROR**</span> message. 
+
+Most often, at startup, the QLA relay closing procedure will fail due to communication mismatches. In this case, you will see
 
 
+<span style="color:orange"> > Sourcing devel/setup.bash >> </span> <span style="color:green">**OK** </span> <br>
+<span style="color:orange"> > Closing Safety relays >> </span> <span style="color:red"> **ERROR** </span>
+<br>
+<span style="color:red"> Check that the FireWire cable is connected to the dvrk PC. If it is, un-plug it and plug it</span> 
+
+
+In that case, **UNPLUG AND RE-PLUG THE FIREWIRE CABLE IN THE UNUSED PORT ON THE BACK OF THE ``dVRK`` COMPUTER**. 
+
+![change firewire cable](images/firewire_cable.jpg)
+
+Please note that this MAY NOT WORK AT FIRST TRY. It is suggested to:
+1. Unplug the FireWire cable
+2. Pluge the FireWire cable in the adjacent port (the one where the cable was not plugged in)
+3. Test the `dvrk_teleoperation` command
+4. If you still get an error, unplug the FireWire cable and plug it in the original port
+5. Test the `dvrk_teleoperation` command again
+6. If you still get an error, repeat the procedure from step 1
+7. If after many tries you don't receive an <span style="color:green">**OK**</span> message, check that all the previous STEPs have been executed correctly.
+
+
+If the command is executed successfully, the following prompt will appear:
+
+<span style="color:orange"> > Sourcing devel/setup.bash >>  </span> 
+<span style="color:green"> **OK** </span> <br>
+<span style="color:orange"> > Closing Safety relays >>  </span> 
+<span style="color:green"> **OK** </span> <br>
+<span style="color:orange"> > Launching dVRK GUI >>  </span> 
+<span style="color:green"> **CHECK OUTPUT** </span>
+
+Followed by the log messages of the dVRK console. Eventually, the GUI control panel will appear and it will look similar to this:
+
+![dvrk control panel](images/dvrk_control_panel.png)
+
+### STEP 6 - Set the instrument type
+The *daVinci* is compatible with a plethora of surgical instruments, the geometry and kinematics of which is different from instrument to instrument. Before teleoperating, you must set the type of instrument you are using: on the console, select 
+`Arms` [1] > `PSM1` [2] then change the tool type [3] to **LARGE_NEEDLE_DRIVER_420006** and confirm. Repeat the procedure for `PSM2`.
+
+![set intrument type](images/set_instruments.png)
 
 ## Available demos
