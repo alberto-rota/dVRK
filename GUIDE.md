@@ -19,8 +19,10 @@
   - [STEP 2 - Turn on the HRSVs](#step-2---turn-on-the-hrsvs)
   - [STEP 3 - Turn on the endoscope lighting system](#step-3---turn-on-the-endoscope-lighting-system)
   - [STEP 4 - Start the ROS framework](#step-4---start-the-ros-framework)
-  - [STEP 5 - Start the dVRK control console](#step-5---start-the-dvrk-control-console)
+  - [STEP 5 - Start the dVRK control panel](#step-5---start-the-dvrk-control-panel)
   - [STEP 6 - Set the instrument type](#step-6---set-the-instrument-type)
+  - [STEP 7 - Set the SUJ values](#step-7---set-the-suj-values)
+  - [STEP 8 - Start the Teleoperation](#step-8---start-the-teleoperation)
 - [Available demos](#available-demos)
 
 ## Lab configuration and nomenclature network connectivity 
@@ -135,7 +137,7 @@ It opens multiple terminals and runs multiple ROS nodes (**including the ROSMAST
 
 See the [ROS network startup](#ros-network-startup) section if you don't need to see the camera feeds or if you need troubleshooting tips.
 
-### STEP 5 - Start the dVRK control console
+### STEP 5 - Start the dVRK control panel
 The GUI control panel for the *daVinci* robot runs on the ``dVRK`` computer.
 Open a terminal and run
 ```
@@ -187,4 +189,29 @@ The *daVinci* is compatible with a plethora of surgical instruments, the geometr
 
 ![set intrument type](images/set_instruments.png)
 
+### STEP 7 - Set the SUJ values 
+The position of the Remote Center of Motions (RCMs) and the reference frames of the base links of the three arms must be calculated before teleoperating. To do so, the SUJ coordinates must be set: this is a manual process and requires reading the values form the calibration paper strips glued on the SUJs. 
+
+Because we usually DO NOT MOVE THE SUJs (and you shouldn't either), the SUJ coordinates have been calibrated once and their values saved. To publish their value on the ROS network, run the following command in a new terminal on ``dVRK``:
+```
+dvrk_calibrate_sujs_default
+```
+After a few seconds of delay (purposely set to latch the ROS messages), the terminal will confirm the publishing of the SUJ values with the message:
+
+<span style="color:green"> **> SUJ coordinates published correctly** </span> <br>
+
+**NOTE:** One will be able to teleoperate the robot without setting the SUJ values, however you will see incongruences between the motion of the MTMs and the motion of the PSMs. This is because, without explicitly publishing the SUJ values, the robot will assume all their coordinates to be zero.
+
+### STEP 8 - Start the Teleoperation
+With the console open and the SUJ values published, you are ready to teleoperate. 
+On the control panel press, in order:
+1. ``Power On`` [1] --> Then wait for the all the red labels on the console to turn green 
+2. ``Home`` [2] --> The robot will move to the home position. The MTMs will move to their home position and orientation (pointing away from you)
+3. ``Start`` [3] --> The robot will move to the teleoperation position. The MTMs will move to the position and orientation that matches the one of the PSM tooltips (usually pointing downwards at an angle)
+    
+![hogrippersme](images/grippers.jpg)
+
+With the grippers in the **READY** position, you are ready to teleoperate. In some cases, the MTMs will be rigid until you perform a "Pinching" action.
+
 ## Available demos
+... to be added
