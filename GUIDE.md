@@ -208,10 +208,16 @@ On the control panel press, in order:
 1. ``Power On`` [1] --> Then wait for the all the red labels on the console to turn green 
 2. ``Home`` [2] --> The robot will move to the home position. The MTMs will move to their home position and orientation (pointing away from you)
 3. ``Start`` [3] --> The robot will move to the teleoperation position. The MTMs will move to the position and orientation that matches the one of the PSM tooltips (usually pointing downwards at an angle)
+  
+![dvrk control panel](images/console_ready.png)
     
+With the grippers in the **READY** position, you are ready to teleoperate.
+
+Checking the orientation of the MTM grippers is how you make sure that the console is ready and the SUJs are calibrated correctly. Ideally, they should point downwards with the same orientation of the PSM tooltips.
+
 ![hogrippersme](images/grippers.jpg)
 
-With the grippers in the **READY** position, you are ready to teleoperate. In some cases, the MTMs will be rigid until you perform a "Pinching" action.
+In some cases, the MTMs will be rigid until you perform a "Pinching" action. An error message on the control panel will notify you in that case.
 
 ## Available demos
 ... to be added
