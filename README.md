@@ -1,7 +1,7 @@
 # dVRK [WORK IN PROGRESS]
 This report contains most of the code, packages and configs in use on the daVinci.
 
-If you are looking for the guide, go to
+If you are looking for the guide, go to [this repo's Wiki](https://github.com/NEARLab-MedicalRobotics/dVRK/wiki):
 <p align="center"> 
 <a>
 <picture>
