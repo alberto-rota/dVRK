@@ -2,8 +2,10 @@
 This repo contains most of the code, packages and configs in use on the *daVinci* robot.
 
 ***
+If you are looking for the guide, go to 
+<a href="https://github.com/NEARLab-MedicalRobotics/dVRK/wiki">this repo's Wiki</a>:   
+
 <p align="left"> 
-If you are looking for the guide, go to <a href="https://github.com/NEARLab-MedicalRobotics/dVRK/wiki">this repo's Wiki</a>:   
 <a href="https://github.com/NEARLab-MedicalRobotics/dVRK/wiki">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="readme/guide_button_white.png">
