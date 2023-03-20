@@ -1,7 +1,7 @@
 # The *daVinci* Research Kit at NEARLab-MRS
 *This repo was made and is maintained by [Alberto Rota](https://nearlab.polimi.it/medical/alberto-rota/). Contributes, issues and corrections are welcome at [Alberto's email](mailto:alberto1.rota@polimi.it).*
 ***
-This repo contains most of the code, packages and configs in use on the *daVinci* robot at the [NEARLab-MRS](https://nearlab.polimi.it/medical/), Politecnico di Milano. 
+This repo contains most of the code, packages and configs in use on the *daVinci* robot at the [NEARLab-MRS](https://nearlab.polimi.it/medical/), Politecnico di Milano. It also contains the 3D files for printable objects used for demos and experiments.
 
 
 The ROSPackages are available to download as single folders or as a complete un_compiled ROS workspace. To compile the workspace, use [catkin](https://catkin-tools.readthedocs.io/en/latest/) as described in the official [ROS wiki](http://wiki.ros.org/ROS/Tutorials/CreatingPackage).
