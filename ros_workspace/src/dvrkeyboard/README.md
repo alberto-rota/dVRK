@@ -16,4 +16,4 @@ You can download this ROSPackage from
 ***
 
 The dVRKeyboard ROSPackage contains code for:
-- TO DO
+- TO D
