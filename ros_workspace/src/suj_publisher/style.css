@@ -1,0 +1,30 @@
+ThreeArms {
+    layout: horizontal;
+}
+
+Joint {
+    layout: horizontal;
+    height: 13%;
+    color: #00ff00;
+
+}
+
+Arm {
+    layout: vertical;
+    width: 33%;
+}
+
+ArmName {
+    layout: horizontal;
+    /* width: 100%; */
+    height: 1%;
+    /* background: #000000; */
+    color: #ff0000;
+    height: 2;
+    /* font-weight: bold; */
+    align: center middle;
+}
+
+SUJPublisherApp {
+
+}
