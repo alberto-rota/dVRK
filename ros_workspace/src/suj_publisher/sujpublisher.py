@@ -5,6 +5,7 @@ from textual.widgets import Button, Header, Footer, Static, Input, Label
 # Containers
 from textual.containers import Container, Vertical, Horizontal
 
+
 class Arm(Static):
         # Compostition of the app
     def compose(self) -> ComposeResult:
@@ -32,6 +33,9 @@ class SUJPublisherApp(App):
         yield Arm()
         yield Arm()
 
+    def load_json(self, path: str) -> dict:
+        with open(path) as f:
+            return json.load(f)
     # Actions
     def action_toggle_dark(self) -> None:
         self.dark = not self.dark

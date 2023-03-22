@@ -21,19 +21,15 @@ from textual.app import App, ComposeResult
 from textual.widgets import Button, Header, Footer, Static, Input, Label
 # Containers
 from textual.containers import Container, Vertical, Horizontal
+import json
 
+# Inheritances
 class JointCode(Static): pass
-
 class Empty(Static): pass
-
 class Entry(Static): pass
-
 class Entries(Horizontal): pass
-
 class JointName(Input): pass
-
 class JointValue(Input): pass
-
 class Joint(Horizontal): pass
 
 # APP CLASS
@@ -44,10 +40,17 @@ class SUJPublisherApp(App):
         ("q", "quit_app", "Quit"), # Press Q to quit
         ("p", "publish_suj", "Publish SUJs"), # Press P to publish
         ("r", "reset_suj", "Reset to Default"), # Press R to reset
+        ("d", "debug", ""), # Press R to reset
     ]
+    DEFAULTS_PATH = "C:\\Users\\alber\\Desktop\\NEARLab\\dVRK\\ros_workspace\\src\\suj_publisher\\defaults.json"
+    
+    def load_json(self, path: str) -> dict:
+        with open(path) as f:
+            self.defaults = json.load(f)
 
     # App Composition
     def compose(self) -> ComposeResult:
+        self.load_json(self.DEFAULTS_PATH)
         yield Header()
         yield Footer()
         
@@ -60,19 +63,16 @@ class SUJPublisherApp(App):
                     
                     # Arm name, displayed with its color
                     yield Static(arm.upper(), id=f"{arm}_armname")
-
-                    # 
-                    # with Entries():
-                    #     yield Empty()                    
-                    #     yield Entry("Name")                    
-                    #     yield Entry("Value")
-                                            
-                    for j in range(0,7):
+                                        
+                    # Each arm is a set of 7 joints    
+                    for j in range(0,6):
                         with Joint():
+                            # Each joint has an index, name and value
                             yield JointCode(f"SUJ {j}")
-                            yield JointName()
-                            yield JointValue()
-
+                            yield JointName(str(self.defaults[arm.upper()]["names"][j]))
+                            yield JointValue(str(self.defaults[arm.upper()]["values"][j]))
+                            
+        # Two Buttons at the bottom, One to reset to default, one to publish
         with Horizontal(id="buttons"):
             yield Button("Reset to Default", variant="warning")
             yield Button("Publish SUJs", variant="success")
@@ -81,6 +81,10 @@ class SUJPublisherApp(App):
         
     def action_quit_app(self) -> None:
         app.quit()
+        
+    def action_debug(self) -> None:
+        print("IN DEBUG MODE")
+        pass
 
 # -------------------------------------------------------------------------- #
 if __name__ == "__main__":
