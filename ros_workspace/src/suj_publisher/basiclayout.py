@@ -29,15 +29,39 @@ class SUJPublisherApp(App):
     CSS_PATH = "sujpublisher.css"
     BINDINGS = [
         ("q", "quit_app", "Quit"), # Press Q to quit
-        ("p", "publish_suj", "Quit"), # Press Q to quit
-        ("r", "reset_suj", "Quit"), # Press Q to quit
-        ("d", "default_suj", "Quit"), # Press Q to quit
+        ("p", "publish_suj", "Publish SUJs"), # Press P to publish
+        ("r", "reset_suj", "Reset to Default"), # Press R to reset
     ]
 
     # App Composition
     def compose(self) -> ComposeResult:
         yield Header()
         yield Footer()
+        with Horizontal(id="threearms"):
+            # with Vertical(id="left-pane"):
+            #     for number in range(15):
+            #         yield Static(f"Vertical layout, child {number}")
+            with Vertical(id="psm1"):
+                yield Static("Text")
+                yield Static("Goes")
+                yield Static("Here")
+                yield Static("!")
+            with Vertical(id="ecm"):
+                yield Static("Text")
+                yield Static("Goes")
+                yield Static("Here")
+                yield Static("!")
+            with Vertical(id="psm2"):
+                yield Static("Text")
+                yield Static("Goes")
+                yield Static("Here")
+                yield Static("!")
+            # with Container(id="bottom-right"):
+            #     yield Static("This")
+            #     yield Static("panel")
+            #     yield Static("is")
+            #     yield Static("using")
+            #     yield Static("grid layout!", id="bottom-right-final")
 
         
     def action_quit_app(self) -> None:

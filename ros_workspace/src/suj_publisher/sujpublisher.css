@@ -1,26 +1,19 @@
-Screen {
-    layout: grid;
-    grid-size: 3;
+#threearms {
+    layout: horizontal;
+    border: solid yellow
 }
 
-Arm {
-    layout: grid;
-    grid-size: 2 7;
-    color: #00ff00;
+#psm1 {
+    border: solid #10c4a6;
+    width: 33%;
 }
+
 #ecm {
-    color: #0000ff;
+    border: solid #00a7ff;
+    width: 33%;
 }
-#jname {
-    color: #ffff00;
-}
-#jval {
-    color: #00ffff;
-}
-#armname {
-    color: #ff00ff;
-}
-#arm {
-    layout: grid;
-    grid-size: 2 7;
+
+#psm2 {
+    border: solid #f65f5f;
+    width: 33%;
 }
