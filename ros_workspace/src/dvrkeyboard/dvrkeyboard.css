@@ -1,3 +1,53 @@
+PSM1 {
+    layout: grid;
+    grid-size: 3 2;
+}
+PSM2 {
+    layout: grid;
+    grid-size: 3 2;
+}
+
+MTML {
+    layout: grid;
+    grid-size: 3 1;
+}
+MTMR {
+    layout: grid;
+    grid-size: 3 1;
+}
+
+PSM1_dof {
+    background: #10c4a6;
+    content-align: center middle;
+    width: 100%;
+    height: 100%;
+    margin:1;
+}
+
+PSM2_dof {
+    background: #f1bf2d;
+    content-align: center middle;
+    width: 100%;
+    height: 100%;
+    margin:1;
+}
+
+MTML_dof {
+    background: #83cabe;
+    content-align: center middle;
+    width: 100%;
+    height: 100%;
+    margin:1;
+}
+
+MTMR_dof {
+    background: #fae39e;
+    content-align: center middle;
+    width: 100%;
+    height: 100%;
+    margin:1;
+}
+
 #left {
     width: 1fr;
     border: #10c4a6;
@@ -6,4 +56,25 @@
 #right {
     width: 1fr;
     border: #f1bf2d;
+}
+
+#psm1_name {
+    color: #10c4a6;
+    content-align: center middle;
+    height: 1;
+}
+#psm2_name {
+    color: #f1bf2d;
+    content-align: center middle;
+    height: 1;
+}
+#mtml_name {
+    color: #10c4a6;
+    content-align: center middle;
+    height: 1;
+}
+#mtmr_name {
+    color: #f1bf2d;
+    content-align: center middle;
+    height: 1;
 }

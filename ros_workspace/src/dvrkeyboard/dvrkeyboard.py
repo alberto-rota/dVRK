@@ -35,11 +35,13 @@ from textual.containers import Container, Vertical, Horizontal
 # Inheritances
 class PSM1(Container): pass
 class PSM2(Container): pass
-class PSM_dof(Static): pass
+class PSM1_dof(Button): pass
+class PSM2_dof(Button): pass
 
 class MTML(Container): pass
 class MTMR(Container): pass
-class MTM_dof(Static): pass
+class MTMR_dof(Button): pass
+class MTML_dof(Button): pass
 
 # APP CLASS
 class DVRKeyboard(App):
@@ -57,19 +59,6 @@ class DVRKeyboard(App):
     
     current_jnames = {}
     current_jvals = {}
-    
-    def load_json(self, jsonpath: str) -> dict:
-        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),jsonpath)) as f:
-            self.defaults = json.load(f)
-# 
-    def reload_defaults(self) -> None: 
-        self.load_json(self.DEFAULTS_PATH)
-        jnames = self.query("JointName")
-        jvals = self.query("JointValue")
-        for a,armname in enumerate(["psm1", "ecm", "psm2"]):
-            for j in range(6):
-                jnames.nodes[a*6+j].value = str(self.defaults[armname.upper()]["names"][j])
-                jvals.nodes[a*6+j].value = str(self.defaults[armname.upper()]["values"][j])
 
     def read_joints(self, arm: str) -> None:
         
@@ -107,32 +96,36 @@ class DVRKeyboard(App):
         
         with Horizontal(id="rightleft"):
             with Vertical(id="left"):
+                yield Static("PSM1",id="psm1_name")
                 yield PSM1(
-                    PSM_dof(),
-                    PSM_dof(),
-                    PSM_dof(),
-                    PSM_dof(),
-                    PSM_dof(),
-                    PSM_dof(),
+                    PSM1_dof("YAW"),
+                    PSM1_dof("PITCH"),
+                    PSM1_dof("INSERTION"),
+                    PSM1_dof("OUTER_ROLL"),
+                    PSM1_dof("OUTER_PITCH"),
+                    PSM1_dof("OUTER_YAW"),
                 )
+                yield Static("MTML",id="mtml_name")
                 yield MTML(
-                    MTM_dof(),   
-                    MTM_dof(),   
-                    MTM_dof(),   
+                    MTML_dof("FORCE X"),   
+                    MTML_dof("FORCE Y"),   
+                    MTML_dof("FORCE X"),   
                 )
             with Vertical(id="right"):
+                yield Static("PSM2",id="psm2_name")
                 yield PSM2(
-                    PSM_dof(),
-                    PSM_dof(),
-                    PSM_dof(),
-                    PSM_dof(),
-                    PSM_dof(),
-                    PSM_dof(),
+                    PSM2_dof("YAW"),
+                    PSM2_dof("PITCH"),
+                    PSM2_dof("INSERTION"),
+                    PSM2_dof("OUTER_ROLL"),
+                    PSM2_dof("OUTER_PITCH"),
+                    PSM2_dof("OUTER_YAW"),
                 )
+                yield Static("MTMR",id="mtmr_name")
                 yield MTMR(
-                    MTM_dof(),   
-                    MTM_dof(),   
-                    MTM_dof(),   
+                    MTMR_dof("FORCE X"),   
+                    MTMR_dof("FORCE Y"),   
+                    MTMR_dof("FORCE X"),   
                 )
  
     # EVENT HANDLERS AND ACTION LISTENERS
