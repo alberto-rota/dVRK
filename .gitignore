@@ -1,2 +1,4 @@
 /ros_workspace/devel
 /ros_workspace/build
+/ros_workspace/src/CMakeLists.txt
+/ros_workspace/.catkin_workspace
