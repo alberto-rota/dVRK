@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Copyright (C) 2023 Alberto Rota
 # 
 # This file is part of suj_publisher.
@@ -15,13 +17,20 @@
 # You should have received a copy of the GNU General Public License
 # along with suj_publisher.  If not, see <http://www.gnu.org/licenses/>.
 
+# Generic
+import json
+import os
+
 # Composition
 from textual.app import App, ComposeResult
 # Widgets
 from textual.widgets import Button, Header, Footer, Static, Input, Label
 # Containers
 from textual.containers import Container, Vertical, Horizontal
-import json
+
+# ROS
+import rospy
+from sensor_msgs.msg import JointState
 
 # Inheritances
 class JointCode(Static): pass
@@ -40,12 +49,13 @@ class SUJPublisher(App):
         ("q", "quit_app", "Quit"), # Press Q to quit
         ("p", "publish_suj", "Publish SUJs"), # Press P to publish
         ("r", "reset_suj", "Reset to Default"), # Press R to reset
-        ("d", "debug", ""), # Press R to reset
+        ("d", "toggle_dark", "Dark Mode"), # Press R to reset
+        ("x", "debug", ""), # Press R to reset
     ]
     DEFAULTS_PATH = "defaults.json"
     
     def load_json(self, path: str) -> dict:
-        with open(path) as f:
+        with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),path)) as f:
             self.defaults = json.load(f)
 # 
     def reload_defaults(self) -> None: 
@@ -56,8 +66,17 @@ class SUJPublisher(App):
             for j in range(6):
                 jnames.nodes[a*6+j].value = str(self.defaults[armname.upper()]["names"][j])
                 jvals.nodes[a*6+j].value = str(self.defaults[armname.upper()]["values"][j])
-        # self.compose()
-    
+
+    def publish_sujs(self) -> None:
+        rospy.init_node('SUJ_publisher_console_node', anonymous=True)
+        pub = rospy.Publisher("/testtopicsujs", JointState, queue_size=10)
+        rate = rospy.Rate(20) 
+        joints = JointState()
+        joints.name = ['outer_yaw','outer_pitch','outer_insertion','outer_roll','outer_wrist_pitch','outer_wrist_yaw']
+        joints.position = [0,1,2,3,4,5]
+        pub.publish(joints)
+        rate.sleep()
+        
     # App Composition
     def compose(self) -> ComposeResult:
         self.load_json(self.DEFAULTS_PATH)
@@ -97,9 +116,19 @@ class SUJPublisher(App):
             self.publish_sujs()
             
     
+    # ACTIONS
     def action_quit_app(self) -> None:
         app.exit()
         
+    def action_toggle_dark(self) -> None:
+        self.dark = not self.dark
+    
+    def action_publish_suj(self) -> None: 
+        self.publish_sujs()
+
+    def action_reset_suj(self) -> None:  
+        self.reload_defaults()
+
     def action_debug(self) -> None:
         print("IN DEBUG MODE")
         pass
