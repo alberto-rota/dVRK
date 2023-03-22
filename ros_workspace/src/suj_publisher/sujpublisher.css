@@ -60,7 +60,7 @@ Button {
 }
 
 #psm2 {
-    border: solid #f65f5f;
+    border: solid #f1bf2d;
     content-align: center middle;
     width: 1fr;
 }
@@ -78,7 +78,7 @@ Button {
 }
 
 #psm2_armname {
-    color: #f65f5f;
+    color: #f1bf2d;
     content-align: center middle;
     height: 1fr;
 }

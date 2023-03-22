@@ -28,9 +28,9 @@ from textual.widgets import Button, Header, Footer, Static, Input, Label
 # Containers
 from textual.containers import Container, Vertical, Horizontal
 
-# ROS
-import rospy
-from sensor_msgs.msg import JointState
+# # ROS
+# import rospy
+# from sensor_msgs.msg import JointState
 
 # Inheritances
 class PSM1(Container): pass
@@ -44,7 +44,7 @@ class MTM_dof(Static): pass
 # APP CLASS
 class DVRKeyboard(App):
     
-    CSS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),"sujpublisher.css")
+    CSS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),"dvrkeyboard.css")
     BINDINGS = [
         ("q", "quit_app", "Quit"), # Press Q to quit
         ("p", "publish_suj", "Publish SUJs"), # Press P to publish
@@ -120,7 +120,7 @@ class DVRKeyboard(App):
                     MTM_dof(),   
                     MTM_dof(),   
                 )
-            with Vertical(id="rigth"):
+            with Vertical(id="right"):
                 yield PSM2(
                     PSM_dof(),
                     PSM_dof(),
@@ -134,12 +134,6 @@ class DVRKeyboard(App):
                     MTM_dof(),   
                     MTM_dof(),   
                 )
-                            
-        # Two Buttons at the bottom, One to reset to default, one to publish
-        with Horizontal(id="buttons"):
-            yield Button("Reset to Default", variant="warning", id="reset_button")
-            yield Button("Publish SUJs", variant="success", id="publish_button")
-            # yield Button("Quit", id="quit")
  
     # EVENT HANDLERS AND ACTION LISTENERS
     def on_button_pressed(self, event: Button.Pressed) -> None:

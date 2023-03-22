@@ -1,9 +1,9 @@
 #left {
     width: 1fr;
-    border: solid blue;
+    border: #10c4a6;
 }
 
 #right {
     width: 1fr;
-    border: solid red;
+    border: #f1bf2d;
 }
