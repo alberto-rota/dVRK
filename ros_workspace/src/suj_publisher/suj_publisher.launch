@@ -1,0 +1,4 @@
+<launch>    
+    <node pkg="suj_publisher" name="sujpublisher" type="sujpublisher.py" output="screen">
+    </node>
+</launch>

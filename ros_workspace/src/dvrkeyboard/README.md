@@ -15,5 +15,12 @@ You can download this ROSPackage from
 
 ***
 
-The dVRKeyboard ROSPackage contains code for:
-- TO D
+The dVRKeyboard ROSPackage allows to publish JointState and Wrench messages to the ROS network using a keyboard. It is thought to be integrated with a *dVRK* and network. The package is a TUI (Textual-User-Interface) based on [Textual](https://textual.textualize.io/)
+
+### Installation
+1. Copy the folder `dvrkeyboard` in the `src` folder of your ROS workspace.
+2. Inside your workspace folder, run `catkin_make` to build the package.
+
+### Launching the package
+1. Source the workspace with `source devel/setup.bash` (alternatively, you can add this line to your `.bashrc` file, but you will have to extend the path and make it complete and non-relative).
+2. Run `roslaunch dvrkeyboard dvrkeyboard.launch` and wait for the TUI to show up

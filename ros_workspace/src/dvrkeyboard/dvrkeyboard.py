@@ -18,8 +18,8 @@
 # along with suj_publisher.  If not, see <http://www.gnu.org/licenses/>.
 
 # Generic
-import json
 import os
+import json
 
 # Composition
 from textual.app import App, ComposeResult
@@ -33,16 +33,16 @@ import rospy
 from sensor_msgs.msg import JointState
 
 # Inheritances
-class JointCode(Static): pass
-class Empty(Static): pass
-class Entry(Static): pass
-class Entries(Horizontal): pass
-class JointName(Input): pass
-class JointValue(Input): pass
-class Joint(Horizontal): pass
+class PSM1(Container): pass
+class PSM2(Container): pass
+class PSM_dof(Static): pass
+
+class MTML(Container): pass
+class MTMR(Container): pass
+class MTM_dof(Static): pass
 
 # APP CLASS
-class SUJPublisher(App):
+class DVRKeyboard(App):
     
     CSS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),"sujpublisher.css")
     BINDINGS = [
@@ -102,27 +102,38 @@ class SUJPublisher(App):
         
     # App Composition
     def compose(self) -> ComposeResult:
-        self.load_json(self.DEFAULTS_PATH)
         yield Header()
         yield Footer()
         
-        # Devide the screen in three columns, one for each arm
-        with Horizontal(id="threearms"):
-            for arm in ["psm1", "ecm", "psm2"]:
-                
-                # Arms are organized vertically
-                with Vertical(id=arm):
-                    
-                    # Arm name, displayed with its color
-                    yield Static(arm.upper(), id=f"{arm}_armname")
-                                        
-                    # Each arm is a set of 7 joints    
-                    for j in range(0,6):
-                        with Joint():
-                            # Each joint has an index, name and value
-                            yield JointCode(f"SUJ {j}")
-                            yield JointName(str(self.defaults[arm.upper()]["names"][j]))
-                            yield JointValue(str(self.defaults[arm.upper()]["values"][j]))
+        with Horizontal(id="rightleft"):
+            with Vertical(id="left"):
+                yield PSM1(
+                    PSM_dof(),
+                    PSM_dof(),
+                    PSM_dof(),
+                    PSM_dof(),
+                    PSM_dof(),
+                    PSM_dof(),
+                )
+                yield MTML(
+                    MTM_dof(),   
+                    MTM_dof(),   
+                    MTM_dof(),   
+                )
+            with Vertical(id="rigth"):
+                yield PSM2(
+                    PSM_dof(),
+                    PSM_dof(),
+                    PSM_dof(),
+                    PSM_dof(),
+                    PSM_dof(),
+                    PSM_dof(),
+                )
+                yield MTMR(
+                    MTM_dof(),   
+                    MTM_dof(),   
+                    MTM_dof(),   
+                )
                             
         # Two Buttons at the bottom, One to reset to default, one to publish
         with Horizontal(id="buttons"):
@@ -158,5 +169,5 @@ class SUJPublisher(App):
 
 # -------------------------------------------------------------------------- #
 if __name__ == "__main__":
-    app = SUJPublisher()
+    app = DVRKeyboard()
     app.run()

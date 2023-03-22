@@ -1,0 +1,9 @@
+#left {
+    width: 1fr;
+    border: solid blue;
+}
+
+#right {
+    width: 1fr;
+    border: solid red;
+}
