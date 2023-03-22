@@ -1,0 +1,26 @@
+Screen {
+    layout: grid;
+    grid-size: 3;
+}
+
+Arm {
+    layout: grid;
+    grid-size: 2 7;
+    color: #00ff00;
+}
+#ecm {
+    color: #0000ff;
+}
+#jname {
+    color: #ffff00;
+}
+#jval {
+    color: #00ffff;
+}
+#armname {
+    color: #ff00ff;
+}
+#arm {
+    layout: grid;
+    grid-size: 2 7;
+}
