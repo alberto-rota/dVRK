@@ -1,19 +1,99 @@
+JointCode {
+    border: solid white;
+    content-align: center middle;
+    width: 1fr;
+}
+
+JointName {
+    width: 2fr;
+}
+
+JointValue {
+    width: 2fr;
+}
+
+Joint {
+    content-align: center middle;
+    height: 3fr;
+}
+
+Entry {
+    height: 1fr;
+    border: solid white;
+    content-align: center bottom;
+    width: 2fr;
+}
+
+Entries {
+    height: 1fr;
+    /* border: solid white; */
+    content-align: center bottom;
+}
+
+Empty {
+    height: 1fr;
+    width: 1fr;
+}
+
+Button {
+    /* border: solid white; */
+    content-align: center middle;
+    width: 1fr;
+    /* margin: 1; */
+}
+
 #threearms {
     layout: horizontal;
-    border: solid yellow
+    height: 5fr;
 }
 
 #psm1 {
     border: solid #10c4a6;
-    width: 33%;
+    content-align: center middle;
+    width: 1fr;
 }
 
 #ecm {
     border: solid #00a7ff;
-    width: 33%;
+    content-align: center middle;
+    width: 1fr;
 }
 
 #psm2 {
     border: solid #f65f5f;
-    width: 33%;
+    content-align: center middle;
+    width: 1fr;
 }
+
+#psm1_armname {
+    color: #10c4a6;
+    content-align: center middle;
+    height: 1fr;
+}
+
+#ecm_armname {
+    color: #00a7ff;
+    content-align: center middle;
+    height: 1fr;
+}
+
+#psm2_armname {
+    color: #f65f5f;
+    content-align: center middle;
+    height: 1fr;
+}
+
+#buttons {
+    layout: horizontal;
+    height: 1fr
+}
+
+/* Buttons */
+#publish {
+    background: green;
+}
+
+#reset {
+    background: orange;
+}
+

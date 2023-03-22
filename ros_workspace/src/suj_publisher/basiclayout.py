@@ -22,6 +22,19 @@ from textual.widgets import Button, Header, Footer, Static, Input, Label
 # Containers
 from textual.containers import Container, Vertical, Horizontal
 
+class JointCode(Static): pass
+
+class Empty(Static): pass
+
+class Entry(Static): pass
+
+class Entries(Horizontal): pass
+
+class JointName(Input): pass
+
+class JointValue(Input): pass
+
+class Joint(Horizontal): pass
 
 # APP CLASS
 class SUJPublisherApp(App):
@@ -37,31 +50,33 @@ class SUJPublisherApp(App):
     def compose(self) -> ComposeResult:
         yield Header()
         yield Footer()
+        
+        # Devide the screen in three columns, one for each arm
         with Horizontal(id="threearms"):
-            # with Vertical(id="left-pane"):
-            #     for number in range(15):
-            #         yield Static(f"Vertical layout, child {number}")
-            with Vertical(id="psm1"):
-                yield Static("Text")
-                yield Static("Goes")
-                yield Static("Here")
-                yield Static("!")
-            with Vertical(id="ecm"):
-                yield Static("Text")
-                yield Static("Goes")
-                yield Static("Here")
-                yield Static("!")
-            with Vertical(id="psm2"):
-                yield Static("Text")
-                yield Static("Goes")
-                yield Static("Here")
-                yield Static("!")
-            # with Container(id="bottom-right"):
-            #     yield Static("This")
-            #     yield Static("panel")
-            #     yield Static("is")
-            #     yield Static("using")
-            #     yield Static("grid layout!", id="bottom-right-final")
+            for arm in ["psm1", "ecm", "psm2"]:
+                
+                # Arms are organized vertically
+                with Vertical(id=arm):
+                    
+                    # Arm name, displayed with its color
+                    yield Static(arm.upper(), id=f"{arm}_armname")
+
+                    # 
+                    # with Entries():
+                    #     yield Empty()                    
+                    #     yield Entry("Name")                    
+                    #     yield Entry("Value")
+                                            
+                    for j in range(0,7):
+                        with Joint():
+                            yield JointCode(f"SUJ {j}")
+                            yield JointName()
+                            yield JointValue()
+
+        with Horizontal(id="buttons"):
+            yield Button("Reset to Default", variant="warning")
+            yield Button("Publish SUJs", variant="success")
+            # yield Button("Quit", id="quit")
 
         
     def action_quit_app(self) -> None:

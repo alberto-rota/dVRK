@@ -22,7 +22,8 @@ class SUJPublisherApp(App):
         ("q", "quit_app", "Quit"), # Press Q to quit
         ("d", "toggle_dark", "Toggle dark mode"), # Press D to toggle dark mode
     ]
-
+    DEFAULTS_PATH = "defaults.json"
+    
     # App Composition
     def compose(self) -> ComposeResult:
         yield Header()

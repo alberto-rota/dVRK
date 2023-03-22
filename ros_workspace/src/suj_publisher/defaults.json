@@ -1,0 +1,56 @@
+{
+    "PSM1": {
+        "names": [
+            "psm1_suj0",
+            "psm1_suj1",
+            "psm1_suj2",
+            "psm1_suj3",
+            "psm1_suj4",
+            "psm1_suj5"
+        ],
+        "values": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0
+        ]
+    },
+    "ECM": {
+        "names": [
+            "ecm_suj0",
+            "ecm_suj1",
+            "ecm_suj2",
+            "ecm_suj3",
+            "ecm_suj4",
+            "ecm_suj5"
+        ],
+        "values": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0
+        ]
+    },
+    "PSM2": {
+        "names": [
+            "psm2_suj0",
+            "psm2_suj1",
+            "psm2_suj2",
+            "psm2_suj3",
+            "psm2_suj4",
+            "psm2_suj5"
+        ],
+        "values": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            5.0
+        ]
+    }
+}
