@@ -47,22 +47,33 @@ class DOF_value(Static): pass
 
 
 # APP CLASS
-class DVRKeyboard(App):
+class TUI_joint_publisher(App):
     
-    CSS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),"dvrkeyboard.css")
+    CSS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),"TUI_joint_publisher.css")
     BINDINGS = [
         ("q", "quit_app", "Quit"), # Press Q to quit
-        ("p", "publish_suj", "Publish SUJs"), # Press P to publish
-        ("r", "reset_suj", "Reset to Default"), # Press R to reset
         ("d", "toggle_dark", "Dark Mode"), # Press R to reset
-        ("x", "debug", ""), # Press R to reset
+        ("r", "reset", "Reset"), # Press R to reset
     ]
-    DEFAULTS_PATH = "defaults.json"
-    # Will contain the names and values upon publishing
+    
+    names_joints = ["YAW","PITCH","INSERTION","OUTER_ROLL","OUTER_PITCH","OUTER_YAW"]
+    names_wrenches = ["FORCE_X","FORCE_Y","FORCE_Z"]
+    
+    joints = {"psm1": [1,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
+    wrenches = {"mtmr": [0,0,0], "mtml": [0,2,0]}
     
     current_jnames = {}
     current_jvals = {}
 
+    def initialize_values(self):
+        for arm in ["psm1", "psm2"]:
+            for j,jname in enumerate(self.names_joints):
+                self.query_one("#"+arm+"_"+jname).label = str(self.joints[arm][j])
+        for arm in ["mtml", "mtmr"]:
+            for j,jname in enumerate(self.names_wrenches):
+                self.query_one("#"+arm+"_"+jname).label = str(self.wrenches[arm][j])
+        print()
+        
     def read_joints(self, arm: str) -> None:
         
         self.current_jnames = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
@@ -97,37 +108,34 @@ class DVRKeyboard(App):
         yield Header()
         yield Footer()
         
-        names_joints = ["YAW","PITCH","INSERTION","OUTER_ROLL","OUTER_PITCH","OUTER_YAW"]
-        names_wrenches = ["FORCE X","FORCE Y","FORCE Z"]
         with Horizontal(id="rightleft"):
             with Vertical(id="left"):
                 yield Static("PSM1",id="psm1_name")
                 with PSM1():
-                    for n in names_joints:
-                        yield PSM1_dof(n+"  -  "+str(0.00))
+                    for n in self.names_joints:
+                        yield PSM1_dof(n+"  -  "+str(0.00), id="psm1_"+n)
                         
                 yield Static("MTML",id="mtml_name")
                 with MTML():
-                    for n in names_wrenches:
-                        yield MTML_dof(n+"  -  "+str(0.00))
+                    for n in self.names_wrenches:
+                        yield MTML_dof(n+"  -  "+str(0.00), id="mtml_"+n)
                         
             with Vertical(id="right"):
                 yield Static("PSM2",id="psm2_name")
                 with PSM2():
-                    for n in names_joints:
-                        yield PSM2_dof(n+"  -  "+str(0.00))
+                    for n in self.names_joints:
+                        yield PSM2_dof(n+"  -  "+str(0.00), id="psm2_"+n)
                 yield Static("MTMR",id="mtmr_name")
                 with MTMR():
-                    for n in names_wrenches:
-                        yield MTMR_dof(n+"  -  "+str(0.00))
+                    for n in self.names_wrenches:
+                        yield MTMR_dof(n+"  -  "+str(0.00), id="mtmr_"+n)
  
+        
+        
     # EVENT HANDLERS AND ACTION LISTENERS
     def on_button_pressed(self, event: Button.Pressed) -> None:
         button_id = event.button.id
-        if button_id == "reset_button":
-            self.reload_defaults()
-        elif button_id == "publish_button":
-            self.publish_sujs()
+
             
     
     # ACTIONS
@@ -137,8 +145,9 @@ class DVRKeyboard(App):
     def action_toggle_dark(self) -> None:
         self.dark = not self.dark
     
-    def action_publish_suj(self) -> None: 
-        self.publish_sujs()
+    def action_reset(self) -> None: 
+        self.initialize_values()
+        # self.reset()
 
     def action_reset_suj(self) -> None:  
         self.reload_defaults()
@@ -149,5 +158,5 @@ class DVRKeyboard(App):
 
 # -------------------------------------------------------------------------- #
 if __name__ == "__main__":
-    app = DVRKeyboard()
+    app = TUI_joint_publisher()
     app.run()
