@@ -28,20 +28,33 @@ from textual.widgets import Button, Header, Footer, Static, Input, Label
 # Containers
 from textual.containers import Container, Vertical, Horizontal
 
-# # ROS
+# ROS
 # import rospy
 # from sensor_msgs.msg import JointState
 
 # Inheritances
 class PSM1(Container): pass
 class PSM2(Container): pass
-class PSM1_dof(Button): pass
-class PSM2_dof(Button): pass
+
+class PSM1_dof_up(Button): pass
+class PSM1_dof_down(Button): pass
+class PSM1_dof(Static): pass
+# 
+class PSM2_dof_up(Button): pass
+class PSM2_dof_down(Button): pass
+class PSM2_dof(Static): pass
 
 class MTML(Container): pass
 class MTMR(Container): pass
-class MTMR_dof(Button): pass
-class MTML_dof(Button): pass
+
+class MTMR_dof_up(Button): pass
+class MTMR_dof_down(Button): pass
+class MTMR_dof(Static): pass
+
+class MTML_dof_up(Button): pass
+class MTML_dof_down(Button): pass
+class MTML_dof(Static): pass
+
 
 class DOF_value(Static): pass
 
@@ -68,40 +81,46 @@ class TUI_joint_publisher(App):
     def initialize_values(self):
         for arm in ["psm1", "psm2"]:
             for j,jname in enumerate(self.names_joints):
-                self.query_one("#"+arm+"_"+jname).label = str(self.joints[arm][j])
+                self.query_one("#"+arm+"_"+jname).label = jname+"  -  "+str(self.joints[arm][j])
         for arm in ["mtml", "mtmr"]:
             for j,jname in enumerate(self.names_wrenches):
-                self.query_one("#"+arm+"_"+jname).label = str(self.wrenches[arm][j])
-        print()
+                self.query_one("#"+arm+"_"+jname).label = jname+"  -  "+str(self.wrenches[arm][j])
+        
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        button_id = event.button.id
+        bhandle = self.query_one("#"+button_id)
+        jname, jvalue_str = str(bhandle.label).split("  -  ")
+        bhandle.label = jname+"  -  "+str(float(jvalue_str)+0.1)
         
     def read_joints(self, arm: str) -> None:
+        pass
         
-        self.current_jnames = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
-        self.current_jvals = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
+    #     self.current_jnames = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
+    #     self.current_jvals = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
         
-        jnames = self.query("JointName")
-        jvals = self.query("JointValue")
-        for a,armname in enumerate(["psm1", "ecm", "psm2"]):
-            for j in range(6):
-                self.current_jnames[armname][j] = jnames.nodes[a*6+j].value
-                self.current_jvals[armname][j] = float(jvals.nodes[a*6+j].value)        
-        return {"names": self.current_jnames[arm], "values": self.current_jvals[arm]}
+    #     jnames = self.query("JointName")
+    #     jvals = self.query("JointValue")
+    #     for a,armname in enumerate(["psm1", "ecm", "psm2"]):
+    #         for j in range(6):
+    #             self.current_jnames[armname][j] = jnames.nodes[a*6+j].value
+    #             self.current_jvals[armname][j] = float(jvals.nodes[a*6+j].value)        
+    #     return {"names": self.current_jnames[arm], "values": self.current_jvals[arm]}
         
-    def publish_sujs(self) -> None:
-        rospy.init_node('SUJ_publisher_console_node', anonymous=True)
-        publishers = {
-            "psm1": rospy.Publisher("/dvrk/SUJ/PSM1/state_joint_current", JointState, queue_size=10),
-            "ecm": rospy.Publisher("/dvrk/SUJ/ECM/state_joint_current", JointState, queue_size=10),
-            "psm2": rospy.Publisher("/dvrk/SUJ/PSM2/state_joint_current", JointState, queue_size=10),
-        }
-        rate = rospy.Rate(20) 
-        for arm in publishers.keys():
-            current_joints = self.read_joints(arm)
-            joints = JointState()
-            joints.name = current_joints["names"]
-            joints.position = current_joints["values"]
-            publishers[arm].publish(joints)
-            rate.sleep()
+    # def publish_sujs(self) -> None:
+    #     rospy.init_node('SUJ_publisher_console_node', anonymous=True)
+    #     publishers = {
+    #         "psm1": rospy.Publisher("/dvrk/SUJ/PSM1/state_joint_current", JointState, queue_size=10),
+    #         "ecm": rospy.Publisher("/dvrk/SUJ/ECM/state_joint_current", JointState, queue_size=10),
+    #         "psm2": rospy.Publisher("/dvrk/SUJ/PSM2/state_joint_current", JointState, queue_size=10),
+    #     }
+    #     rate = rospy.Rate(20) 
+    #     for arm in publishers.keys():
+    #         current_joints = self.read_joints(arm)
+    #         joints = JointState()
+    #         joints.name = current_joints["names"]
+    #         joints.position = current_joints["values"]
+    #         publishers[arm].publish(joints)
+    #         rate.sleep()
         
     # App Composition
     def compose(self) -> ComposeResult:
@@ -113,30 +132,35 @@ class TUI_joint_publisher(App):
                 yield Static("PSM1",id="psm1_name")
                 with PSM1():
                     for n in self.names_joints:
-                        yield PSM1_dof(n+"  -  "+str(0.00), id="psm1_"+n)
+                        yield PSM1_dof(str(0.00))
+                        yield PSM1_dof_up("+") #n+"  -  "+str(0.00), id="psm1_"+n)
+                        yield PSM1_dof_down("-") #n+"  -  "+str(0.00), id="psm1_"+n)
                         
                 yield Static("MTML",id="mtml_name")
                 with MTML():
                     for n in self.names_wrenches:
-                        yield MTML_dof(n+"  -  "+str(0.00), id="mtml_"+n)
+                        yield MTML_dof(str(0.0))
+                        yield MTML_dof_up("+") #n+"  -  "+str(0.00), id="mtml_"+n)
+                        yield MTML_dof_down("-") #n+"  -  "+str(0.00), id="mtml_"+n)
                         
             with Vertical(id="right"):
                 yield Static("PSM2",id="psm2_name")
                 with PSM2():
                     for n in self.names_joints:
-                        yield PSM2_dof(n+"  -  "+str(0.00), id="psm2_"+n)
+                        yield PSM2_dof(str(0.0))
+                        yield PSM2_dof_up("+") #n+"  -  "+str(0.00), id="psm2_"+n)
+                        yield PSM2_dof_down("-") #n+"  -  "+str(0.00), id="psm2_"+n)
                 yield Static("MTMR",id="mtmr_name")
                 with MTMR():
                     for n in self.names_wrenches:
-                        yield MTMR_dof(n+"  -  "+str(0.00), id="mtmr_"+n)
+                        yield MTMR_dof(str(0.0))
+                        yield MTMR_dof_up("+") #n+"  -  "+str(0.00), id="mtmr_"+n)
+                        yield MTMR_dof_down("-") #n+"  -  "+str(0.00), id="mtmr_"+n)
  
         
         
     # EVENT HANDLERS AND ACTION LISTENERS
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        button_id = event.button.id
-
-            
+        
     
     # ACTIONS
     def action_quit_app(self) -> None:
