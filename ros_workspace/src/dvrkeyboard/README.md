@@ -27,5 +27,7 @@ The STEVE ROSPackage allows to send joint and wrench messages on a ROS network b
 3. Run `rosrun dvrkeyboard keyboard_teleop_PSM2.py` if you want to communicate with PSM2
 4. Run `rosrun dvrkeyboard keyboard_wrench_MTMR.py` if you want to communicate with MTMR
 5. Run `rosrun dvrkeyboard keyboard_wrench_MTML.py` if you want to communicate with MTML
- The terminal will idle and wait for your key presses
-1. To exit, keep `Ctrl-C` pressed for a few seconds
+   
+The terminal will idle and wait for your key presses
+
+To exit, keep `Ctrl-C` pressed for a few seconds
