@@ -77,8 +77,8 @@ class TUI_joint_publisher(App):
         ("r", "reset", "Reset"), # Press R to reset
     ]
     
-    names_joints = ["YAW","PITCH","INSERTION","OUTER_ROLL","OUTER_PITCH","OUTER_YAW"]
-    names_wrenches = ["FORCE_X","FORCE_Y","FORCE_Z"]
+    names_joints = ["YAW","PITCH","INSERTION","OUTER-ROLL","OUTER-PITCH","OUTER-YAW"]
+    names_wrenches = ["FORCE-X","FORCE-Y","FORCE-Z"]
     
     joints = {"psm1": [1,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
     wrenches = {"mtmr": [0,0,0], "mtml": [0,2,0]}
@@ -104,6 +104,7 @@ class TUI_joint_publisher(App):
         button_id = event.button.id
         bhandle = self.query_one("#"+button_id)
         jname, jvalue_str = str(bhandle.label).split("  -  ")
+        increment = self.query_one("#increment").value
         bhandle.label = jname+"  -  "+str(float(jvalue_str)+0.1)
         
     def read_joints(self, arm: str) -> None:
@@ -135,12 +136,6 @@ class TUI_joint_publisher(App):
     #         joints.position = current_joints["values"]
     #         publishers[arm].publish(joints)
     #         rate.sleep()
-    
-    def yield_joint_widgets(self, armname: str, jointname: str):    
-        yield JointName(jointname)
-        yield JointValue(str(0.0),id="psm1_"+armname)
-        yield ButtonUp("UP", variant="success")
-        yield ButtonDown("DOWN", variant="error")
 
     # App Composition
     def compose(self) -> ComposeResult:
@@ -154,16 +149,16 @@ class TUI_joint_publisher(App):
                     for n in self.names_joints:
                         yield JointName(n)
                         yield JointValue(str(0.0),id="psm1_"+n)
-                        yield ButtonUp("UP", variant="success")
-                        yield ButtonDown("DOWN", variant="error")
+                        yield ButtonUp("UP", variant="success", id="psm1_"+n+"_up")
+                        yield ButtonDown("DOWN", variant="error", id="psm1_"+n+"_down")
                         
                 yield Static("MTML",id="mtml_name")
                 with MTML():
                     for n in self.names_wrenches:
                         yield JointName(n)
                         yield JointValue(str(0.0),id="mtml"+n)
-                        yield ButtonUp("UP", variant="success")
-                        yield ButtonDown("DOWN", variant="error")
+                        yield ButtonUp("UP", variant="success", id="mtml_"+n+"_up")
+                        yield ButtonDown("DOWN", variant="error", id="mtml_"+n+"_down")
                         
             with Vertical(id="right"):
                 yield Static("PSM2",id="psm2_name")
@@ -171,23 +166,36 @@ class TUI_joint_publisher(App):
                     for n in self.names_joints:
                         yield JointName(n)
                         yield JointValue(str(0.0),id="psm2_"+n)
-                        yield ButtonUp("UP", variant="success")
-                        yield ButtonDown("DOWN", variant="error")
+                        yield ButtonUp("UP", variant="success", id="psm2_"+n+"_up")
+                        yield ButtonDown("DOWN", variant="error", id="psm2_"+n+"_down")
 
                 yield Static("MTMR",id="mtmr_name")
                 with MTMR():
                     for n in self.names_wrenches:
                         yield JointName(n)
                         yield JointValue(str(0.0),id="mtmr"+n)
-                        yield ButtonUp("UP", variant="success")
-                        yield ButtonDown("DOWN", variant="error")
- 
-        
+                        yield ButtonUp("UP", variant="success", id="mtmr_"+n+"_up")
+                        yield ButtonDown("DOWN", variant="error", id="mtmr_"+n+"_down")
+        with Container(id="bottombar"):
+            yield Static("INCREMENT = ", id="increment_label")
+            yield Input("0.1", id="increment")
+            yield Static("",id="debug_console")
         
     # EVENT HANDLERS AND ACTION LISTENERS
-        
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        button_id = event.button.id
+        bhandle = self.query_one("#"+button_id)
+        hdebug = self.query_one("#debug_console") # Handle on the debug console
+        bmsg = button_id.split("_")
+        increment = float(self.query_one("#increment").value)
+        hdebug.update(
+            f"{bmsg[0].upper()} {bmsg[1].upper()} {bmsg[2].upper()} : {increment}"
+        )
+        # jname, jvalue_str = str(bhandle.label).split("  -  ")
+        # bhandle.label = jname+"  -  "+str(float(jvalue_str)+0.1)
     
     # ACTIONS
+    
     def action_quit_app(self) -> None:
         app.exit()
         

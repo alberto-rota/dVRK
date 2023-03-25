@@ -55,6 +55,10 @@ ButtonUp {
 ButtonDown {
     content-align: center middle;
 }
+/* ------------------------- */
+Input {
+
+}
 
 PSM1_dof_up {
     /* background: green; */
@@ -177,4 +181,27 @@ DOF_value {
     color: #f1bf2d;
     content-align: center middle;
     height: 1;
+}
+/* -------------------------------------------- */
+
+#debug_console {
+    content-align: left middle;
+    color:  blue;
+    /* height: 3; */
+    border: solid blue;
+}
+
+#bottombar {
+    layout: grid;
+    grid-size: 3 1;
+    height: 3;
+    grid-columns: 1fr 1fr 4fr;
+    content-align: center middle;
+}
+
+#increment_label {
+    content-align: right middle;
+    color:  white;
+    /* height: 3; */
+    border: solid white;
 }
