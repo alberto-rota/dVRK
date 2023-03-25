@@ -35,25 +35,33 @@ from textual.containers import Container, Vertical, Horizontal
 # Inheritances
 class PSM1(Container): pass
 class PSM2(Container): pass
-
-class PSM1_dof_up(Button): pass
-class PSM1_dof_down(Button): pass
-class PSM1_dof(Static): pass
-# 
-class PSM2_dof_up(Button): pass
-class PSM2_dof_down(Button): pass
-class PSM2_dof(Static): pass
-
 class MTML(Container): pass
 class MTMR(Container): pass
 
+class JointValue(Static): pass
+class JointName(Static): pass
+class ButtonUp(Button): pass
+class ButtonDown(Button): pass
+
+class Joint(Horizontal): pass
+    
+        
+class PSM1_dof_up(Button): pass
+class PSM1_dof_down(Button): pass
+class PSM1_dof(Label): pass
+# 
+class PSM2_dof_up(Button): pass
+class PSM2_dof_down(Button): pass
+class PSM2_dof(Label): pass
+
+
 class MTMR_dof_up(Button): pass
 class MTMR_dof_down(Button): pass
-class MTMR_dof(Static): pass
+class MTMR_dof(Label): pass
 
 class MTML_dof_up(Button): pass
 class MTML_dof_down(Button): pass
-class MTML_dof(Static): pass
+class MTML_dof(Label): pass
 
 
 class DOF_value(Static): pass
@@ -79,12 +87,18 @@ class TUI_joint_publisher(App):
     current_jvals = {}
 
     def initialize_values(self):
-        for arm in ["psm1", "psm2"]:
-            for j,jname in enumerate(self.names_joints):
-                self.query_one("#"+arm+"_"+jname).label = jname+"  -  "+str(self.joints[arm][j])
-        for arm in ["mtml", "mtmr"]:
-            for j,jname in enumerate(self.names_wrenches):
-                self.query_one("#"+arm+"_"+jname).label = jname+"  -  "+str(self.wrenches[arm][j])
+        joints = self.query("PSM1_dof")
+        for j in range(6):
+            joints.nodes[j].value = self.names_joints[j]+" - "+str(self.joints["psm1"][j])
+        joints = self.query("PSM2_dof")
+        for j in range(6):
+            joints.nodes[j].value = self.names_joints[j]+" - "+str(self.joints["psm2"][j])
+        wrenches = self.query("MTML_dof")
+        for j in range(3):
+            wrenches.nodes[j].value = self.names_wrenches[j]+" - "+str(self.wrenches["mtml"][j])
+        wrenches = self.query("MTMR_dof")
+        for j in range(3):
+            wrenches.nodes[j].value = self.names_wrenches[j]+" - "+str(self.wrenches["mtmr"][j])
         
     def on_button_pressed(self, event: Button.Pressed) -> None:
         button_id = event.button.id
@@ -121,7 +135,13 @@ class TUI_joint_publisher(App):
     #         joints.position = current_joints["values"]
     #         publishers[arm].publish(joints)
     #         rate.sleep()
-        
+    
+    def yield_joint_widgets(self, armname: str, jointname: str):    
+        yield JointName(jointname)
+        yield JointValue(str(0.0),id="psm1_"+armname)
+        yield ButtonUp("UP", variant="success")
+        yield ButtonDown("DOWN", variant="error")
+
     # App Composition
     def compose(self) -> ComposeResult:
         yield Header()
@@ -132,30 +152,35 @@ class TUI_joint_publisher(App):
                 yield Static("PSM1",id="psm1_name")
                 with PSM1():
                     for n in self.names_joints:
-                        yield PSM1_dof(str(0.00))
-                        yield PSM1_dof_up("+") #n+"  -  "+str(0.00), id="psm1_"+n)
-                        yield PSM1_dof_down("-") #n+"  -  "+str(0.00), id="psm1_"+n)
+                        yield JointName(n)
+                        yield JointValue(str(0.0),id="psm1_"+n)
+                        yield ButtonUp("UP", variant="success")
+                        yield ButtonDown("DOWN", variant="error")
                         
                 yield Static("MTML",id="mtml_name")
                 with MTML():
                     for n in self.names_wrenches:
-                        yield MTML_dof(str(0.0))
-                        yield MTML_dof_up("+") #n+"  -  "+str(0.00), id="mtml_"+n)
-                        yield MTML_dof_down("-") #n+"  -  "+str(0.00), id="mtml_"+n)
+                        yield JointName(n)
+                        yield JointValue(str(0.0),id="mtml"+n)
+                        yield ButtonUp("UP", variant="success")
+                        yield ButtonDown("DOWN", variant="error")
                         
             with Vertical(id="right"):
                 yield Static("PSM2",id="psm2_name")
                 with PSM2():
                     for n in self.names_joints:
-                        yield PSM2_dof(str(0.0))
-                        yield PSM2_dof_up("+") #n+"  -  "+str(0.00), id="psm2_"+n)
-                        yield PSM2_dof_down("-") #n+"  -  "+str(0.00), id="psm2_"+n)
+                        yield JointName(n)
+                        yield JointValue(str(0.0),id="psm2_"+n)
+                        yield ButtonUp("UP", variant="success")
+                        yield ButtonDown("DOWN", variant="error")
+
                 yield Static("MTMR",id="mtmr_name")
                 with MTMR():
                     for n in self.names_wrenches:
-                        yield MTMR_dof(str(0.0))
-                        yield MTMR_dof_up("+") #n+"  -  "+str(0.00), id="mtmr_"+n)
-                        yield MTMR_dof_down("-") #n+"  -  "+str(0.00), id="mtmr_"+n)
+                        yield JointName(n)
+                        yield JointValue(str(0.0),id="mtmr"+n)
+                        yield ButtonUp("UP", variant="success")
+                        yield ButtonDown("DOWN", variant="error")
  
         
         
