@@ -1,7 +1,7 @@
 /* ARMS */
 PSM1 {
     layout: grid;
-    grid-size: 4 6;
+    grid-size: 4 7;
     grid-columns: 2fr 2fr 1fr 1fr;
     content-align: center middle;
     height:2fr;
@@ -10,7 +10,7 @@ PSM1 {
 
 PSM2 {
     layout: grid;
-    grid-size: 4 6;
+    grid-size: 4 7;
     grid-columns: 2fr 2fr 1fr 1fr;
     content-align: center middle;
     height:2fr;
@@ -56,102 +56,7 @@ ButtonDown {
     content-align: center middle;
 }
 /* ------------------------- */
-Input {
 
-}
-
-PSM1_dof_up {
-    /* background: green; */
-    width: 100%;
-    height: 100%;
-    content-align: center middle;
-    margin: 1;
-}
-
-PSM1_dof_down {
-    /* background: red; */
-    width: 100%;
-    height:100%;
-    content-align: center middle;
-    /* margin: 1; */
-}
-
-PSM1_dof {
-    border: solid #10c4a6;
-    width: 100%;
-    height: 100%;
-    content-align: center middle;
-}
-
-PSM2_dof_up {
-    /* background: green; */
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-PSM2_dof_down {
-    /* background: red; */
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-PSM2_dof {
-    border: solid #f1bf2d;
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-MTML_dof_up {
-    /* background: green; */
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-MTML_dof_down {
-    /* background: red; */
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-MTML_dof {
-    border: solid #83cabe;
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-MTMR_dof_up {
-    /* background: green; */
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-MTMR_dof_down {
-    /* background: red; */
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-MTMR_dof {
-    border: solid #fae39e;
-    content-align: center middle;
-    width: 100%;
-    height:100%;
-}
-
-DOF_value {
-    color: #ff00ff;
-    content-align: center middle;
-    height: 1fr;
-    border: white;
-}
 
 #left {
     width: 1fr;    
@@ -202,6 +107,12 @@ DOF_value {
 #increment_label {
     content-align: right middle;
     color:  white;
-    /* height: 3; */
-    border: solid white;
+    height: 3;
+    /* border: solid white; */
+}
+
+#psm1_gripper_switch {
+    column-span: 2;
+    content-align: center middle;
+
 }

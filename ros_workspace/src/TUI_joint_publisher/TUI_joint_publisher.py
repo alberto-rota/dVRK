@@ -24,13 +24,14 @@ import json
 # Composition
 from textual.app import App, ComposeResult
 # Widgets
-from textual.widgets import Button, Header, Footer, Static, Input, Label
+from textual.widgets import Button, Header, Footer, Static, Input, Label, Switch
 # Containers
 from textual.containers import Container, Vertical, Horizontal
 
 # ROS
-# import rospy
-# from sensor_msgs.msg import JointState
+import rospy
+from geometry_msgs.msg import Wrench
+from sensor_msgs.msg import JointState
 
 # Inheritances
 class PSM1(Container): pass
@@ -75,68 +76,113 @@ class TUI_joint_publisher(App):
         ("q", "quit_app", "Quit"), # Press Q to quit
         ("d", "toggle_dark", "Dark Mode"), # Press R to reset
         ("r", "reset", "Reset"), # Press R to reset
+        ("p", "publish", "Publish "), # Press R to reset
     ]
     
     names_joints = ["YAW","PITCH","INSERTION","OUTER-ROLL","OUTER-PITCH","OUTER-YAW"]
     names_wrenches = ["FORCE-X","FORCE-Y","FORCE-Z"]
     
-    joints = {"psm1": [1,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
-    wrenches = {"mtmr": [0,0,0], "mtml": [0,2,0]}
+    joints = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0], "psm1g":False,"psm2g":False,}
+    wrenches = {"mtml": [0,0,0],  "mtmr": [0,0,0],}
+    
+    joints_zero = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0], "psm1g":False,"psm2g":False,}
+    wrenches_zero = {"mtml": [0,0,0],  "mtmr": [0,0,0],}
     
     current_jnames = {}
     current_jvals = {}
-
-    def initialize_values(self):
-        joints = self.query("PSM1_dof")
-        for j in range(6):
-            joints.nodes[j].value = self.names_joints[j]+" - "+str(self.joints["psm1"][j])
-        joints = self.query("PSM2_dof")
-        for j in range(6):
-            joints.nodes[j].value = self.names_joints[j]+" - "+str(self.joints["psm2"][j])
-        wrenches = self.query("MTML_dof")
-        for j in range(3):
-            wrenches.nodes[j].value = self.names_wrenches[j]+" - "+str(self.wrenches["mtml"][j])
-        wrenches = self.query("MTMR_dof")
-        for j in range(3):
-            wrenches.nodes[j].value = self.names_wrenches[j]+" - "+str(self.wrenches["mtmr"][j])
         
+    def on_mount(self) -> None:
+        self.reset_values()
+        self.write_joint_values()
+        self.publish()
+        
+    def reset_values(self) -> None:
+        self.joints = self.joints_zero.copy()
+        self.wrenches = self.wrenches_zero.copy()
+        self.write_joint_values()
+        
+    def write_joint_values(self) -> None:
+        for arm in ["psm1", "psm2"]:
+            for j, joint in enumerate(self.names_joints):
+                self.query_one("#"+arm+"_"+joint).update("{:.4f}".format(self.joints[arm][j]))
+        for arm in ["mtml", "mtmr"]:
+            for w, wrench in enumerate(self.names_wrenches):
+                self.query_one("#"+arm+"_"+wrench).update("{:.4f}".format(self.wrenches[arm][w]))
+        self.query_one("#psm1_gripper").update("OPEN" if self.joints["psm1g"] else "CLOSE")
+        self.query_one("#psm2_gripper").update("OPEN" if self.joints["psm2g"] else "CLOSE")
+                       
     def on_button_pressed(self, event: Button.Pressed) -> None:
         button_id = event.button.id
-        bhandle = self.query_one("#"+button_id)
-        jname, jvalue_str = str(bhandle.label).split("  -  ")
-        increment = self.query_one("#increment").value
-        bhandle.label = jname+"  -  "+str(float(jvalue_str)+0.1)
+        hdebug = self.query_one("#debug_console") # Handle on the debug console
+        [arm,joint,direction] = bmsg = button_id.split("_")
         
-    def read_joints(self, arm: str) -> None:
-        pass
+        increment = float(self.query_one("#increment").value)
+        if arm in ["psm1g","psm2g"]:
+            if direction=="up": increment="OPEN" 
+            else: increment="CLOSE"
+            hdebug.update(
+                f"{arm[:-1].upper()} {joint.upper()} : {increment}"
+            )
+        else:
+            hdebug.update(
+                f"{arm.upper()} {joint.upper()} {direction.upper()} : {increment}"
+            )
         
-    #     self.current_jnames = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
-    #     self.current_jvals = {"psm1": [0,0,0,0,0,0],"ecm": [0,0,0,0,0,0],"psm2": [0,0,0,0,0,0],}
-        
-    #     jnames = self.query("JointName")
-    #     jvals = self.query("JointValue")
-    #     for a,armname in enumerate(["psm1", "ecm", "psm2"]):
-    #         for j in range(6):
-    #             self.current_jnames[armname][j] = jnames.nodes[a*6+j].value
-    #             self.current_jvals[armname][j] = float(jvals.nodes[a*6+j].value)        
-    #     return {"names": self.current_jnames[arm], "values": self.current_jvals[arm]}
-        
-    # def publish_sujs(self) -> None:
-    #     rospy.init_node('SUJ_publisher_console_node', anonymous=True)
-    #     publishers = {
-    #         "psm1": rospy.Publisher("/dvrk/SUJ/PSM1/state_joint_current", JointState, queue_size=10),
-    #         "ecm": rospy.Publisher("/dvrk/SUJ/ECM/state_joint_current", JointState, queue_size=10),
-    #         "psm2": rospy.Publisher("/dvrk/SUJ/PSM2/state_joint_current", JointState, queue_size=10),
-    #     }
-    #     rate = rospy.Rate(20) 
-    #     for arm in publishers.keys():
-    #         current_joints = self.read_joints(arm)
-    #         joints = JointState()
-    #         joints.name = current_joints["names"]
-    #         joints.position = current_joints["values"]
-    #         publishers[arm].publish(joints)
-    #         rate.sleep()
-
+        if arm in ["psm1","psm2"]:
+            if direction == "up":
+                self.joints[arm][self.names_joints.index(joint)] += increment
+            elif direction == "down":
+                self.joints[arm][self.names_joints.index(joint)] -= increment
+        if arm in ["mtml","mtmr"]:
+            if direction == "up":
+                self.wrenches[arm][self.names_wrenches.index(joint)] += increment
+            elif direction == "down":
+                self.wrenches[arm][self.names_wrenches.index(joint)] -= increment
+        if arm in ["psm1g","psm2g"]:
+            if direction == "up":
+                self.joints[arm] = True
+            elif direction == "down":
+                self.joints[arm] = False
+                
+        self.write_joint_values()
+        self.publish()
+            
+    def publish(self) -> None:
+        rospy.init_node('TUI_joint_publisher', anonymous=True)
+        rate = rospy.Rate(20) 
+        publishers = {
+            "psm1": rospy.Publisher("/dvrk/PSM1/state_joint_current", JointState, queue_size=10),
+            "psm2": rospy.Publisher("/dvrk/PSM2/state_joint_current", JointState, queue_size=10),
+        }
+        for arm in publishers.keys():
+            joints = JointState()
+            joints.name = ['outer_yaw','outer_pitch','outer_insertion','outer_roll','outer_wrist_pitch','outer_wrist_yaw']
+            joints.position = self.joints[arm]
+            publishers[arm].publish(joints)
+            rate.sleep()
+                    
+        publishers = {
+            "mtml": rospy.Publisher("/dvrk/MTML/set_wrench_body_safe", Wrench, queue_size=10),
+            "mtmr": rospy.Publisher("/dvrk/MTMR/set_wrench_body_safe", Wrench, queue_size=10),
+        }
+        for arm in publishers.keys():
+            wrench = Wrench()
+            wrench.force.x = self.wrenches[arm][0]
+            wrench.force.y = self.wrenches[arm][1]
+            wrench.force.z = self.wrenches[arm][2]
+            publishers[arm].publish(wrench)
+            rate.sleep()
+        publishers = {
+            "psm1g": rospy.Publisher("/dvrk/PSM1/state_jaw_current", JointState, queue_size=10),
+            "psm2g": rospy.Publisher("/dvrk/PSM2/state_jaw_current", JointState, queue_size=10),
+        }
+        for arm in publishers.keys():
+            jaw = JointState()
+            jaw.name = ['jaw']
+            if self.joints["psm1g"]: jaw.position = [-2] 
+            else: jaw.position = [1]   
+            publishers[arm].publish(jaw)
+            
     # App Composition
     def compose(self) -> ComposeResult:
         yield Header()
@@ -148,15 +194,19 @@ class TUI_joint_publisher(App):
                 with PSM1():
                     for n in self.names_joints:
                         yield JointName(n)
-                        yield JointValue(str(0.0),id="psm1_"+n)
+                        yield JointValue("{:.4f}".format(0.0),id="psm1_"+n)
                         yield ButtonUp("UP", variant="success", id="psm1_"+n+"_up")
                         yield ButtonDown("DOWN", variant="error", id="psm1_"+n+"_down")
+                    yield JointName("Gripper")
+                    yield JointValue("OPEN",id="psm1_gripper")                        
+                    yield ButtonUp("OPEN", variant="default", id="psm1g_gripper_up")
+                    yield ButtonDown("CLOSE", variant="primary", id="psm1g_gripper_down")
                         
                 yield Static("MTML",id="mtml_name")
                 with MTML():
                     for n in self.names_wrenches:
                         yield JointName(n)
-                        yield JointValue(str(0.0),id="mtml"+n)
+                        yield JointValue("{:.4f}".format(0.0),id="mtml_"+n)
                         yield ButtonUp("UP", variant="success", id="mtml_"+n+"_up")
                         yield ButtonDown("DOWN", variant="error", id="mtml_"+n+"_down")
                         
@@ -165,37 +215,28 @@ class TUI_joint_publisher(App):
                 with PSM2():
                     for n in self.names_joints:
                         yield JointName(n)
-                        yield JointValue(str(0.0),id="psm2_"+n)
+                        yield JointValue("{:.4f}".format(0.0),id="psm2_"+n)
                         yield ButtonUp("UP", variant="success", id="psm2_"+n+"_up")
                         yield ButtonDown("DOWN", variant="error", id="psm2_"+n+"_down")
+                    yield JointName("Gripper")
+                    yield JointValue("OPEN",id="psm2_gripper")                        
+                    yield ButtonUp("OPEN", variant="default", id="psm2g_gripper_up")
+                    yield ButtonDown("CLOSE", variant="primary", id="psm2g_gripper_down")
 
                 yield Static("MTMR",id="mtmr_name")
                 with MTMR():
                     for n in self.names_wrenches:
                         yield JointName(n)
-                        yield JointValue(str(0.0),id="mtmr"+n)
+                        yield JointValue("{:.4f}".format(0.0),id="mtmr_"+n)
                         yield ButtonUp("UP", variant="success", id="mtmr_"+n+"_up")
                         yield ButtonDown("DOWN", variant="error", id="mtmr_"+n+"_down")
         with Container(id="bottombar"):
             yield Static("INCREMENT = ", id="increment_label")
             yield Input("0.1", id="increment")
             yield Static("",id="debug_console")
-        
-    # EVENT HANDLERS AND ACTION LISTENERS
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        button_id = event.button.id
-        bhandle = self.query_one("#"+button_id)
-        hdebug = self.query_one("#debug_console") # Handle on the debug console
-        bmsg = button_id.split("_")
-        increment = float(self.query_one("#increment").value)
-        hdebug.update(
-            f"{bmsg[0].upper()} {bmsg[1].upper()} {bmsg[2].upper()} : {increment}"
-        )
-        # jname, jvalue_str = str(bhandle.label).split("  -  ")
-        # bhandle.label = jname+"  -  "+str(float(jvalue_str)+0.1)
+        # self.write_joint_values()
     
     # ACTIONS
-    
     def action_quit_app(self) -> None:
         app.exit()
         
@@ -203,14 +244,12 @@ class TUI_joint_publisher(App):
         self.dark = not self.dark
     
     def action_reset(self) -> None: 
-        self.initialize_values()
-        # self.reset()
+        self.reset_values()
 
-    def action_reset_suj(self) -> None:  
-        self.reload_defaults()
+    def action_publish(self) -> None:
+        self.publish()
 
     def action_debug(self) -> None:
-        print("IN DEBUG MODE")
         pass
 
 # -------------------------------------------------------------------------- #

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(tui_joint_publisher)
+project(dvrkeyboard)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -161,7 +161,10 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
-  TUI_joint_publisher.py
+  keyboard_teleop_PSM1.py
+  keyboard_teleop_PSM2.py
+  keyboard_wrench_MTMR.py
+  keyboard_wrench_MTML.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

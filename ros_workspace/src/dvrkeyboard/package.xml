@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>tui_joint_publisher</name>
+  <name>dvrkeyboard</name>
   <version>0.0.0</version>
-  <description>Publish dVRK joint messages from a TUI</description>
+  <description>Publish dVRK joint and wrench messages from key presses</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

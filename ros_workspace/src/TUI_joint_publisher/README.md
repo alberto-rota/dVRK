@@ -23,4 +23,6 @@ The TUI_joint_publisher ROSPackage allows to publish JointState and Wrench messa
 
 ### Launching the package
 1. Source the workspace with `source devel/setup.bash` (alternatively, you can add this line to your `.bashrc` file, but you will have to extend the path and make it complete and non-relative).
-2. Run `roslaunch TUI_joint_publisher TUI_joint_publisher.launch` and wait for the TUI to show up
+2. Run `roslaunch TUI_joint_publisher tuijointpublisher.launch` and wait for the TUI to show up
+
+![screenshot](preview.png)

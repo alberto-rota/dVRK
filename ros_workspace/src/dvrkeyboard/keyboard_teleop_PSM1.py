@@ -43,6 +43,7 @@ def talker():
     rate = rospy.Rate(20) # 10hz
     joints = JointState()
     joints.name = ['outer_yaw','outer_pitch','outer_insertion','outer_roll','outer_wrist_pitch','outer_wrist_yaw']
+
     joints.position = [0,0,0,0,0,0]
 
     jaw = JointState()
