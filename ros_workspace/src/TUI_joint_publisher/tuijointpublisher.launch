@@ -1,4 +1,4 @@
 <launch>    
-    <node pkg="TUI_joint_publisher" name="TUI_joint_publisher" type="TUI_joint_publisher.py" output="screen">
+    <node pkg="tui_joint_publisher" name="TUI_joint_publisher" type="TUI_joint_publisher.py" output="screen">
     </node>
 </launch>

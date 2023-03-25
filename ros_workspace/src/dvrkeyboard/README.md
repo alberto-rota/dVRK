@@ -23,10 +23,10 @@ The STEVE ROSPackage allows to send joint and wrench messages on a ROS network b
 
 ### Launching the package
 1. Source the workspace with `source devel/setup.bash` (alternatively, you can add this line to your `.bashrc` file, but you will have to extend the path and make it complete and non-relative).
-2. Run `rosrun dvrkeyboard keyboard_teleop_PSM1.py` if you want to communicate with PSM1
-3. Run `rosrun dvrkeyboard keyboard_teleop_PSM2.py` if you want to communicate with PSM2
-4. Run `rosrun dvrkeyboard keyboard_wrench_MTMR.py` if you want to communicate with MTMR
-5. Run `rosrun dvrkeyboard keyboard_wrench_MTML.py` if you want to communicate with MTML
+2. Run `rosrun dvrkeyboard PSM1.py` if you want to communicate with PSM1
+3. Run `rosrun dvrkeyboard PSM2.py` if you want to communicate with PSM2
+4. Run `rosrun dvrkeyboard MTMR.py` if you want to communicate with MTMR
+5. Run `rosrun dvrkeyboard MTML.py` if you want to communicate with MTML
    
 The terminal will idle and wait for your key presses
 

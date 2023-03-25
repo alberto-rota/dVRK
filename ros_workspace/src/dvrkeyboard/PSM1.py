@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 
 import rospy
 from sensor_msgs.msg import JointState
@@ -36,13 +37,14 @@ RESOLUTION_I = 0.001
 
 def talker():
     pinched = False;
-    pub = rospy.Publisher("/dvrk/PSM2/state_joint_current", JointState, queue_size=10)
-    pub2 = rospy.Publisher("/dvrk/PSM2/state_jaw_current", JointState, queue_size=10)
+    pub = rospy.Publisher("/dvrk/PSM1/state_joint_current", JointState, queue_size=10)
+    pub2 = rospy.Publisher("/dvrk/PSM1/state_jaw_current", JointState, queue_size=10)
 
     rospy.init_node('keyboard_teleop', anonymous=True)
     rate = rospy.Rate(20) # 10hz
     joints = JointState()
     joints.name = ['outer_yaw','outer_pitch','outer_insertion','outer_roll','outer_wrist_pitch','outer_wrist_yaw']
+
     joints.position = [0,0,0,0,0,0]
 
     jaw = JointState()

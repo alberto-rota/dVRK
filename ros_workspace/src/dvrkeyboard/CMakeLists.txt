@@ -161,10 +161,10 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
-  keyboard_teleop_PSM1.py
-  keyboard_teleop_PSM2.py
-  keyboard_wrench_MTMR.py
-  keyboard_wrench_MTML.py
+  PSM1.py
+  PSM2.py
+  MTMR.py
+  MTML.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

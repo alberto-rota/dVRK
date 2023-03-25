@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 
 import rospy
 from geometry_msgs.msg import Wrench
@@ -23,7 +24,7 @@ def getKey(settings, timeout):
 def saveTerminalSettings():
     return termios.tcgetattr(sys.stdin)
 
-topic = "/dvrk/MTMR/set_wrench_body_safe"
+topic = "/dvrk/MTML/set_wrench_body_safe"
 
 RESOLUTION = 0.1
 
