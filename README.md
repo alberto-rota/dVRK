@@ -21,11 +21,11 @@ If you are looking for the guide on how to use the *daVinci*, go to
 ***
 
 Our ROSPackages:
-<p align="left"> 
+<p align="left" > 
 <a href="https://github.com/NEARLab-MedicalRobotics/dVRK/tree/main/ros_workspace/src/steve">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="readme/steve_button_white.png">
-  <img style="vertical-align:middle" alt="NEARLab" src="readme/steve_button_dark.png" width="200" > 
+  <img style="vertical-align:middle" alt="NEARLab" src="readme/steve_button_dark.png" width="200" margin = 10> 
 </picture>
 </a>
 <a href="https://github.com/NEARLab-MedicalRobotics/dVRK/tree/main/ros_workspace/src/suj_publisher">
@@ -36,8 +36,15 @@ Our ROSPackages:
 </a>
 <a href="https://github.com/NEARLab-MedicalRobotics/dVRK/tree/main/ros_workspace/src/TUI_joint_publisher">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="readme/TUI_joint_publisher_button_white.png">
-  <img style="vertical-align:middle" alt="NEARLab" src="readme/TUI_joint_publisher_button_dark.png" width="200" > 
+  <source media="(prefers-color-scheme: dark)" srcset="readme/tui_button_white.png">
+  <img style="vertical-align:middle" alt="NEARLab" src="readme/tui_button_dark.png" width="200" > 
 </picture>
-</a> </p>
+</a> 
+<a href="https://github.com/NEARLab-MedicalRobotics/dVRK/tree/main/ros_workspace/src/dvrkeyboard">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="readme/dvrkeyboard_button_white.png">
+  <img style="vertical-align:middle" alt="NEARLab" src="readme/dvrkeyboard_button_dark.png" width="200" > 
+</picture>
+</a> 
+</p>
 
