@@ -108,8 +108,8 @@ class TUI_joint_publisher(App):
         for arm in ["mtml", "mtmr"]:
             for w, wrench in enumerate(self.names_wrenches):
                 self.query_one("#"+arm+"_"+wrench).update("{:.4f}".format(self.wrenches[arm][w]))
-        self.query_one("#psm1_gripper").update("OPEN" if self.joints["psm1g"] else "CLOSE")
-        self.query_one("#psm2_gripper").update("OPEN" if self.joints["psm2g"] else "CLOSE")
+        self.query_one("#psm1_gripper").update("CLOSE" if self.joints["psm1g"] else "OPEN")
+        self.query_one("#psm2_gripper").update("CLOSE" if self.joints["psm2g"] else "OPEN")
                        
     def on_button_pressed(self, event: Button.Pressed) -> None:
         button_id = event.button.id
@@ -179,7 +179,7 @@ class TUI_joint_publisher(App):
         for arm in publishers.keys():
             jaw = JointState()
             jaw.name = ['jaw']
-            if self.joints["psm1g"]: jaw.position = [-2] 
+            if self.joints[arm]: jaw.position = [-2] 
             else: jaw.position = [1]   
             publishers[arm].publish(jaw)
             
@@ -199,8 +199,8 @@ class TUI_joint_publisher(App):
                         yield ButtonDown("DOWN", variant="error", id="psm1_"+n+"_down")
                     yield JointName("Gripper")
                     yield JointValue("OPEN",id="psm1_gripper")                        
-                    yield ButtonUp("OPEN", variant="default", id="psm1g_gripper_up")
-                    yield ButtonDown("CLOSE", variant="primary", id="psm1g_gripper_down")
+                    yield ButtonUp("OPEN", variant="default", id="psm1g_gripper_down")
+                    yield ButtonDown("CLOSE", variant="primary", id="psm1g_gripper_up")
                         
                 yield Static("MTML",id="mtml_name")
                 with MTML():
@@ -220,8 +220,8 @@ class TUI_joint_publisher(App):
                         yield ButtonDown("DOWN", variant="error", id="psm2_"+n+"_down")
                     yield JointName("Gripper")
                     yield JointValue("OPEN",id="psm2_gripper")                        
-                    yield ButtonUp("OPEN", variant="default", id="psm2g_gripper_up")
-                    yield ButtonDown("CLOSE", variant="primary", id="psm2g_gripper_down")
+                    yield ButtonUp("OPEN", variant="default", id="psm2g_gripper_down")
+                    yield ButtonDown("CLOSE", variant="primary", id="psm2g_gripper_up")
 
                 yield Static("MTMR",id="mtmr_name")
                 with MTMR():
