@@ -1,0 +1,5 @@
+<launch>    
+    <node pkg="savevideo" name="save_endoscope_video" type="main.py" output="screen">
+    </node>
+
+</launch>
