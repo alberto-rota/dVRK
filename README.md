@@ -52,7 +52,7 @@ Our ROSPackages:
   <img style="vertical-align:middle" alt="NEARLab" src="readme/savevideo_button_dark.png" width="200" > 
 </picture>
 </a> 
-<a href="https://github.com/NEARLab-MedicalRobotics/dVRK/tree/main/ros_workspace/src/rosutils">
+<a href="https://github.com/NEARLab-MedicalRobotics/dVRK/tree/main/ros_workspace/src/ros_utils">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="readme/rosutils_button_white.png">
   <img style="vertical-align:middle" alt="NEARLab" src="readme/rosutils_button_dark.png" width="200" > 
