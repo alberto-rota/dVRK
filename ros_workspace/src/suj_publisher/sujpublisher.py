@@ -30,6 +30,7 @@ from textual.containers import Container, Vertical, Horizontal
 
 # ROS
 import rospy
+import rostopic
 from sensor_msgs.msg import JointState
 
 # Inheritances
@@ -57,6 +58,25 @@ class SUJPublisher(App):
     
     current_jnames = {}
     current_jvals = {}
+    
+    def check_rosmaster(self) -> bool:
+        ROS_MASTER_URI = os.environ['ROS_MASTER_URI']
+        ROS_IP = os.environ['ROS_IP']
+        # Checkif rosmaster is running or not.
+        try:
+            rostopic.get_topic_class('/rosout')
+            master = True
+        except: master = False
+
+        if not master:
+            print("[red]ROSMaster not found! ")
+            print("[red]-----------------------------------------------------------------------------------------")
+            print("[red]Check that the ROSMaster is running. If it is, reconfigure your environmet variables")
+            print("[red]> ROS_MASTER_URI = ",ROS_MASTER_URI, "[red]---> Must be the IP address of the computer running ROSMaster")
+            print("[red]> ROS_IP = ",ROS_IP, "[red]---> Must be your IP address")
+            print("[red]-----------------------------------------------------------------------------------------")
+            print("[red]Reconfigure this variables with `export ROS_MASTER_URI=http://<MASTER_IP>:11311` and `export ROS_IP=<IP>`\n")
+        return master
     
     def load_json(self, jsonpath: str) -> dict:
         with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),jsonpath)) as f:
@@ -159,4 +179,4 @@ class SUJPublisher(App):
 # -------------------------------------------------------------------------- #
 if __name__ == "__main__":
     app = SUJPublisher()
-    app.run()
+    if app.check_rosmaster(): app.run()

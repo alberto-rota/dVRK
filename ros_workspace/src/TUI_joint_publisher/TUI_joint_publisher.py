@@ -20,6 +20,7 @@
 # Generic
 import os
 import json
+from rich import print
 
 # Composition
 from textual.app import App, ComposeResult
@@ -30,6 +31,7 @@ from textual.containers import Container, Vertical, Horizontal
 
 # ROS
 import rospy
+import rostopic
 from geometry_msgs.msg import Wrench
 from sensor_msgs.msg import JointState
 
@@ -90,7 +92,26 @@ class TUI_joint_publisher(App):
     
     current_jnames = {}
     current_jvals = {}
-        
+    
+    def check_rosmaster(self) -> bool:
+        ROS_MASTER_URI = os.environ['ROS_MASTER_URI']
+        ROS_IP = os.environ['ROS_IP']
+        # Checkif rosmaster is running or not.
+        try:
+            rostopic.get_topic_class('/rosout')
+            master = True
+        except: master = False
+
+        if not master:
+            print("[red]ROSMaster not found! ")
+            print("[red]-----------------------------------------------------------------------------------------")
+            print("[red]Check that the ROSMaster is running. If it is, reconfigure your environmet variables")
+            print("[red]> ROS_MASTER_URI = ",ROS_MASTER_URI, "[red]---> Must be the IP address of the computer running ROSMaster")
+            print("[red]> ROS_IP = ",ROS_IP, "[red]---> Must be your IP address")
+            print("[red]-----------------------------------------------------------------------------------------")
+            print("[red]Reconfigure this variables with `export ROS_MASTER_URI=http://<MASTER_IP>:11311` and `export ROS_IP=<IP>`\n")
+        return master
+    
     def on_mount(self) -> None:
         self.reset_values()
         self.write_joint_values()
@@ -147,7 +168,7 @@ class TUI_joint_publisher(App):
         self.write_joint_values()
         self.publish()
             
-    def publish(self) -> None:
+    def publish(self) -> None: 
         rospy.init_node('TUI_joint_publisher', anonymous=True)
         rate = rospy.Rate(20) 
         publishers = {
@@ -255,4 +276,4 @@ class TUI_joint_publisher(App):
 # -------------------------------------------------------------------------- #
 if __name__ == "__main__":
     app = TUI_joint_publisher()
-    app.run()
+    if app.check_rosmaster(): app.run()

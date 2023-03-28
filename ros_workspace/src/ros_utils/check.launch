@@ -1,0 +1,4 @@
+<launch>    
+    <node pkg="ros" name="check" type="check.py" output="screen">
+    </node>
+</launch>

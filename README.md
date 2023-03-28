@@ -45,6 +45,18 @@ Our ROSPackages:
   <source media="(prefers-color-scheme: dark)" srcset="readme/dvrkeyboard_button_white.png">
   <img style="vertical-align:middle" alt="NEARLab" src="readme/dvrkeyboard_button_dark.png" width="200" > 
 </picture>
+</a>
+<a href="https://github.com/NEARLab-MedicalRobotics/dVRK/tree/main/ros_workspace/src/savevideo">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="readme/savevideo_button_white.png">
+  <img style="vertical-align:middle" alt="NEARLab" src="readme/savevideo_button_dark.png" width="200" > 
+</picture>
 </a> 
+<a href="https://github.com/NEARLab-MedicalRobotics/dVRK/tree/main/ros_workspace/src/rosutils">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="readme/rosutils_button_white.png">
+  <img style="vertical-align:middle" alt="NEARLab" src="readme/rosutils_button_dark.png" width="200" > 
+</picture>
+</a>  
 </p>
 
